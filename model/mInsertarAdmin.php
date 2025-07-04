@@ -10,8 +10,8 @@
 
     if ($adminCount == 0) { // Solo insertamos si no hay administradores
         $admin_usuario = "admin123";
-        $admin_nombre = "Carolina Allauca";
-        $admin_password = password_hash("callauca", PASSWORD_BCRYPT); // Encripta la contraseña
+        $admin_nombre = "Marizta Rosero";
+        $admin_password = password_hash("Mrosero", PASSWORD_BCRYPT); // Encripta la contraseña
         $admin_rol = 1;
 
         $stmt = $conn->prepare("INSERT INTO usuario (nombre_usuario, nombre_completo, contraseña, rol_id) VALUES (?, ?, ?, ?)");

@@ -18,12 +18,12 @@ require_once __DIR__ . '/controller/UsuarioController.php';
         <div class="top-bar">ADMINISTRADOR</div>
         <div class="header-content">
             <div class="logo">
-                <img src="img/lg5.png" alt="Logo Marianita">
+                <img src="public\img\Pescaderia Don Walter logo.png" alt="Logo Marianita">
             </div>
             <h1 class="title">Administrador: <?php echo htmlspecialchars($nombreAdministrador); ?></h1>
             <div>
             <a class="btnHe w-90 align-items-center" href="index.html">
-    <img src="img/clob.png" alt="Cerrar sesión">
+    <img src="public/img/clob.png" alt="Cerrar sesión">
 </a>
             </div>
         </div>
@@ -37,26 +37,26 @@ require_once __DIR__ . '/controller/UsuarioController.php';
             <div class="row">
                 <div title="Listado de productos, opciones de Filtrado Edición Eliminación" class="col-md-3 mb-3">
                     <a class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height" href="./controller/adminControlador.php?opcion=1">
-                        <img src="img/inv.png" alt="imagen no disponible" class="img-fluid mb-2 custom-img">
-                        Mostrar Productos                 
+                        <img src="public/img/icons/icoGestCli.png" alt="imagen no disponible" class="img-fluid mb-2 custom-img">
+                        Gestionar Clientes
                     </a>
                 </div>
                 <div title="Registrar Nuevos Productos en inventario" class="col-md-3 mb-3">
                     <a href="./controller/adminControlador.php?opcion=2" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height">
-                        <img src="img/agr.png" alt="imagen no disponible" class="img-fluid mb-2 custom-img">
-                        Agregar Producto
+                        <img src="public/img/icons/icoGestProd.png" alt="imagen no disponible" class="img-fluid mb-2 custom-img">
+                        Gestionar Productos
                     </a>
                 </div>
                 <div title="Control Ventas Eliminación" class="col-md-3 mb-3">
                     <a href="./controller/adminControlador.php?opcion=3" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height">
-                        <img src="img/ven.png" alt="imagen no disponible" class="img-fluid mb-2 custom-img">
-                        Registro de Ventas
+                        <img src="public/img/icons/icoReport.png" alt="imagen no disponible" class="img-fluid mb-2 custom-img">
+                        Reportes
                     </a>
                 </div>
                 <div title="Listado de productos por abastecer" class="col-md-3 mb-3">
                     <a href="./controller/adminControlador.php?opcion=4" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height">
-                        <img src="img/abs.png" alt="imagen no disponible" class="img-fluid mb-2 custom-img">
-                        Adquisiciones
+                        <img src="public/img/icons/icoFacturas.png" alt="imagen no disponible" class="img-fluid mb-2 custom-img">
+                        Facturas
                     </a>
                 </div>
             </div>
@@ -67,18 +67,11 @@ require_once __DIR__ . '/controller/UsuarioController.php';
     <br><br><br>
     <br><br><br>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>Síguenos:</p>
-            <div class="social-icons">
-                <img src="img/fb.png" alt="Facebook">
-                <img src="img/tk.png" alt="TikTok">
-                <img src="img/ins.png" alt="Instagram">
-                <img src="img/ws.png" alt="WhatsApp">
+    <footer class="footer mt-5">
+        <div class="container text-center">
+            <p>Soporte: 0992714396</p>
+
             </div>
-            
-            <p>Contactos: 0994745362</p>
-            <p>Dirección: Argentinos y Nueva York - Riobamba</p>
         </div>
     </footer>
 </body>

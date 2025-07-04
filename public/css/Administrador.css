@@ -18,7 +18,7 @@
     }
     
     .top-bar {
-        background: #2b2763;
+        background: #1a519d;
         padding: 10px;
         text-align: left;
         font-size: 20px;
@@ -56,7 +56,7 @@
         /* Tamaño de fuente reducido */
         text-align: center;
         font-family: 'times', cursive;
-        color: #333189;
+        color: #1a519d;
         margin: 0;
         /* Elimina márgenes en el título */
         /* Espaciado inferior para evitar colisión con la línea */
@@ -98,7 +98,7 @@
     .linea-debajo-header {
         height: 5px;
         /* Ajusta el grosor según lo necesites */
-        background-color: #333189;
+        background-color: #1a519d;
     }
     
     .logout-icon {
@@ -126,7 +126,7 @@
     }
     
     footer {
-        background: #333189;
+        background: #1a519d;
         color: white;
         text-align: center;
         padding: 20px;
@@ -210,7 +210,7 @@
         cursor: pointer;
         border-radius: 0px;
         text-decoration: none;
-        color: #E51D23;
+        color: #002e5d;
         text-decoration: underline;
         display: flex;
         align-items: center;
