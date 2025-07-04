@@ -1,0 +1,255 @@
+    body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Roboto', sans-serif;
+        background: white;
+    }
+    
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .header {
+        background: #ffffff;
+        color: white;
+    }
+    
+    .top-bar {
+        background: #2b2763;
+        padding: 10px;
+        text-align: left;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    
+    .header-content {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        height: auto;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        /* Distribuye los elementos a lo ancho */
+    }
+    
+    .header-buttons {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        /* Mueve el botón a la derecha */
+    }
+    
+    .logo img {
+        height: 100px;
+        margin: 0px;
+        max-height: 80px;
+        /*Altura máxima para el logo, ajustable */
+        margin-right: 40px;
+        /* Espacio a la derecha del logo */
+    }
+    
+    .title {
+        font-size: 30px;
+        /* Tamaño de fuente reducido */
+        text-align: center;
+        font-family: 'times', cursive;
+        color: #333189;
+        margin: 0;
+        /* Elimina márgenes en el título */
+        /* Espaciado inferior para evitar colisión con la línea */
+        /*margin: 10px; Add some margin around the title */
+        /*word-wrap: break-word; /* Prevent title from wrapping */
+    }
+    
+    .btnHe {
+        border: none;
+        font-size: 20px;
+        /* Tamaño de fuente reducido */
+        cursor: pointer;
+        border-radius: 0px;
+        text-decoration: none;
+        color: #E51D23;
+        text-decoration: underline;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        padding: 5px 10px;
+        /* Padding reducido */
+    }
+    
+    .btnHe img {
+        width: 40px;
+        height: auto;
+        margin-left: 10px;
+    }
+    
+    .secondary {
+        color: #E51D23;
+        text-decoration: underline;
+        display: flex;
+        /* enables flexbox for icon positioning */
+        align-items: center;
+        /* vertically center aligns icon */
+    }
+    
+    .linea-debajo-header {
+        height: 5px;
+        /* Ajusta el grosor según lo necesites */
+        background-color: #333189;
+    }
+    
+    .logout-icon {
+        width: 40px;
+        height: 40px;
+        margin-left: 5px;
+        width: 100%;
+        margin-top: 10px;
+        /* Espaciado para evitar colisión con el texto */
+    }
+    
+    .body-central {
+        display: flex;
+        justify-content: center;
+        /* Centra horizontalmente */
+        align-items: center;
+        /* Centra verticalmente */
+        flex-wrap: wrap;
+        /* Permite que los elementos se ajusten en diferentes líneas */
+        padding: 20px;
+    }
+    
+    #buscador.form-control {
+        width: 50%;
+    }
+    
+    footer {
+        background: #333189;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        position: fixed;
+        width: 100%;
+        margin-top: auto;
+        /* Empuja el footer a la parte inferior */
+        position: relative;
+        /* Evita que se superponga */
+    }
+    
+    .footer-content p {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+    
+    .social-icons {
+        margin-top: 10px;
+    }
+    
+    .social-icons img {
+        width: 40px;
+        margin: 0 10px;
+    }
+    /* Media query for responsiveness */
+    
+    @media (max-width: 768px) {
+        .header-content {
+            flex-direction: column;
+            align-items: center;
+            /* Centrar elementos en pantallas pequeñas */
+            text-align: center;
+            /* Centrar texto en pantallas pequeñas */
+        }
+        .logo {
+            margin-bottom: 10px;
+            /* Espacio inferior para el logo en móvil */
+            margin-right: 0;
+            /* Quitar margen a la derecha del logo en móvil */
+        }
+        .title {
+            font-size: 20px;
+            /* Tamaño de fuente reducido en móvil */
+            margin-bottom: 10px;
+            /* Espacio inferior para el título en móvil */
+        }
+        .header-buttons {
+            margin-left: 0;
+            /* Quitar margen a la izquierda del botón en móvil */
+            flex-direction: column;
+            /* Botones en columna en móvil */
+            align-items: center;
+            /* Centrar botones en móvil */
+        }
+        .btnHe {
+            margin-bottom: 10px;
+            /* Espacio inferior para los botones en móvil */
+            font-size: 14px;
+            /* Tamaño de fuente reducido en móvil */
+        }
+    }
+    
+    .tooltip {
+        position: absolute;
+        background-color: black;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+        display: none;
+    }
+    
+    img:hover+.tooltip {
+        display: block;
+    }
+    /* ... boton seccion Administrador) ... */
+    
+    .btnAd {
+        border: none;
+        font-size: 18px;
+        /* Tamaño de fuente reducido */
+        cursor: pointer;
+        border-radius: 0px;
+        text-decoration: none;
+        color: #E51D23;
+        text-decoration: underline;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        padding: 5px 10px;
+        /* Padding reducido */
+    }
+    
+    .btnAd-custom-height {
+        height: 100px;
+        /* Ajusta según sea necesario */
+        padding: 10px;
+    }
+    
+    .custom-img {
+        max-height: 200px;
+        width: auto;
+        /* Mantiene la proporción de la imagen */
+        border-radius: 10px;
+        /* Esquinas redondeadas */
+    }
+    
+    @media (max-width: 480px) {
+        .btn img {
+            width: 20px;
+            /* Reduce aún más en móviles */
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .btn img {
+            width: 30px;
+            /* Reduce el tamaño en pantallas pequeñas */
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .btn img {
+            width: 50px;
+            /* Aumenta el tamaño en pantallas grandes */
+        }
+    }

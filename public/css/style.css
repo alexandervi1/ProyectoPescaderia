@@ -1,0 +1,388 @@
+/* Estilos personalizados */
+
+body {
+    background-color: #f8f9fa;
+}
+
+
+/* Navbar */
+
+.navbar {
+    background-color: #3f3d9e;
+    /* Color morado oscuro */
+    padding: 10px 0;
+    /* Espaciado interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Sombra para diferenciar */
+}
+
+.navbar-brand img {
+    /* Ajusta el tamaño del logo */
+    background-color: white;
+    /* Fondo blanco para el logo */
+    padding: 5px;
+    /* Espaciado interno para el logo */
+    border-radius: 5px;
+    /* Bordes redondeados para el logo */
+}
+
+.navbar .search-bar {
+    max-width: 400px;
+    /* Ancho máximo del buscador */
+}
+
+.navbar .search-bar input,
+.navbar .search-bar button {
+    border: 1px solid #ccc;
+    /* Bordes claros para mejorar la visibilidad */
+}
+
+.navbar .btn-login {
+    background-color: #3f3d9e;
+    /* Botón "Iniciar Sesión" */
+    color: white;
+    border: 1px solid white;
+    /* Borde blanco para el botón */
+}
+
+.navbar .btn-register {
+    background-color: red;
+    /* Botón "Registrarse" */
+    color: white;
+    border: 1px solid red;
+    /* Borde rojo para el botón */
+}
+
+
+/* Footer */
+
+.footer {
+    background-color: #3f3d9e;
+    /* Color morado oscuro */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.footer-icons a {
+    color: white;
+    margin: 0 10px;
+    font-size: 24px;
+}
+
+
+/* Fondo oscuro y animación */
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* 🔹 Fondo oscurecido */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+
+/* 🔹 Contenedor del modal */
+
+.modal-content {
+    background: #ffffff;
+    /* 🔹 Fondo blanco */
+    border-radius: 15px;
+    padding: 20px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+
+/* 🔹 Botón de cerrar (X) */
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* 🔹 Botón de inicio de sesión y registro */
+
+#login-btn,
+#register-btn {
+    width: 100%;
+    background: #007bff;
+    /* 🔹 Azul de la paleta */
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#login-btn:hover,
+#register-btn:hover {
+    background: #0056b3;
+    /* 🔹 Azul oscuro al pasar el mouse */
+}
+
+
+/* 🔹 Estilos para el Modal de Administrador */
+
+#admin-login-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+
+/* 🔹 Contenedor del modal */
+
+#admin-login-modal .modal-content {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* 🔹 Botón de cierre */
+
+#close-admin-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+/* 🔹 Botón de iniciar sesión */
+
+#admin-login-btn {
+    width: 100%;
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#admin-login-btn:hover {
+    background: #b52b38;
+}
+
+
+/* Aumentar el tamaño y cambiar el color del icono de carrito */
+
+div a i.bi-cart {
+    font-size: 26px;
+    /* Tamaño más grande del icono */
+    color: white;
+    /* Color blanco */
+    margin: 0 10px;
+}
+
+
+/* Cambiar color al pasar el mouse */
+
+div a:hover i.bi-cart {
+    color: #ccc;
+    /* Gris claro al pasar el mouse */
+}
+
+div a:hover i.bi-power {
+    color: #ccc;
+    /* Gris claro al pasar el mouse */
+}
+
+.card-title {
+    margin-bottom: -5px;
+    /* Ajusta este valor según sea necesario */
+}
+
+.card-text {
+    margin-top: -170px;
+    /* Ajusta este valor según sea necesario */
+}
+
+.product-discount,
+.product-price {
+    margin-top: -148px;
+    margin-bottom: -180px;
+}
+
+
+/* Estilo para el botón de categoría */
+
+.cat.btn {
+    background-color: #2a63e8;
+    /* Naranja vibrante */
+    color: white;
+    /* Texto en blanco */
+    font-weight: bold;
+    /* Texto en negrita */
+    border: none;
+    /* Sin bordes */
+    border-radius: 15px;
+    /* Bordes redondeados */
+    padding: 13px 20px;
+    /* Espaciado interno */
+    font-size: 14px;
+    /* Tamaño del texto */
+    justify-content: center;
+    /* Centrar horizontalmente */
+    align-items: center;
+    /* Centrar verticalmente */
+    text-transform: uppercase;
+    display: flex;
+    /* Convertir texto a mayúsculas */
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+
+/* Efecto hover (cuando el mouse pasa por encima) */
+
+.cat.btn:hover {
+    background-color: #43419c;
+    /* Un tono más oscuro de naranja */
+    transform: scale(1.05);
+    /* Ligero efecto de zoom */
+}
+
+
+/* Estilo para el icono de cerrar sesión */
+
+div a i.bi-box-arrow-right {
+    font-size: 26px;
+    /* Tamaño más grande del icono */
+    color: white;
+    /* Color blanco */
+    margin: 0 10px;
+}
+
+
+/* Cambiar color al pasar el mouse */
+
+div a:hover i.bi-box-arrow-right {
+    color: #ccc;
+    /* Gris claro al pasar el mouse */
+}
+
+
+/* 🔹 Mejoramos la apariencia del usuario en la navbar */
+
+#user-options {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    /* 🔹 Aumenta la separación entre los elementos */
+}
+
+
+/* 🔹 Ajustamos el nombre del usuario */
+
+.user-text {
+    font-size: 26px;
+    font-weight: bold;
+    color: white;
+    margin-right: 15px;
+    /* 🔹 Más separación del carrito */
+}
+
+#open-admin-modal {
+    background-color: #ff5722;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+#guest-options a,
+#guest-options button {
+    margin-right: 10px;
+    /* Espaciado entre botones */
+}
+
+input[type="text"],
+[type="email"],
+[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.search-suggestions ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.search-suggestions li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.search-suggestions li:hover {
+    background-color: #f0f0f0;
+}
+
+.btn-primary {
+    background-color: #2a63e8;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#product-list .card .btn {
+    display: block;
+    margin: 0 auto;
+    margin-block-end: 20px;
+    width: 50%;
+    border-radius: 5px;
+}

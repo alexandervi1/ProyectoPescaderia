@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Marianita - Juguetes</title>
+    <!-- Bootstrap ICONS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="public/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-login-modal">&times;</button>
+            <!-- Botón de cierre -->
+            <center><img src="./public/img/Logo.png" alt="Logo" class="logo" width="200px"></center>
+            <hr>
+            <h3>Iniciar Sesión</h3>
+            <hr>
+            <br>
+            <form id="login-form">
+                <label for="login-usuario">Nombre de Usuario:</label>
+                <input type="text" id="login-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
+
+                <label for="login-password">Contraseña:</label>
+                <input type="password" id="login-password" placeholder="Tu contraseña" required style="width: 300px;">
+
+                <button type="submit" id="login-btn">Ingresar</button>
+                <center>
+                    <p id="register-link">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
+                </center>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-register-modal">&times;</button>
+            <hr>
+            <h3>Registro</h3>
+            <hr>
+            <br>
+            <form id="register-form">
+                <label for="register-nombre">Nombre Completo:</label>
+                <input type="text" id="register-nombre" placeholder="Tu nombre completo" required style="width: 300px;">
+
+                <label for="register-usuario">Nombre de Usuario:</label>
+                <input type="text" id="register-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
+
+                <label for="register-password">Contraseña:</label>
+                <input type="password" id="register-password" placeholder="Tu contraseña" required style="width: 300px;">
+
+                <button type="submit" id="register-btn">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <!-- Imagen como logo -->
+            <a class="navbar-brand" href="#">
+                <img src="public/img/Logo.png" alt="Logo Juguetería Marianita" width="200" height="64">
+            </a>
+
+            <!-- Barra de búsqueda -->
+            <form class="d-flex mx-auto search-bar" id="search-form">
+                <input class="form-control me-2" type="search" placeholder="Filtrar" id="search-input">
+                <button class="btn btn-outline-light" type="submit">
+        <i class="bi bi-search"></i>
+    </button>
+                <div id="search-suggestions" class="search-suggestions"></div>
+            </form>
+
+            <!-- Opciones antes de iniciar sesión -->
+            <div id="guest-options">
+                <a href="./controller/usercontrolador.php?accion=quienes_somos" id="btn-quienes" class="btn btn-link text-light" style=" color: white;">¿Quiénes somos?</a>
+                <button class="btn btn-danger" id="open-login-modal">Iniciar Sesión</button>
+                <a href="#" class="btn btn-primary" id="open-register-modal">Registrarse</a>
+            </div>
+
+            <!-- Opciones después de iniciar sesión -->
+            <div id="user-options">
+                <a href="#" style="color: white;">
+                    <i class="bi bi-person-circle" style="font-size: 1.5rem; margin-right: 5px;"></i>
+                    <span id="user-name" class="user-info"></span>
+                </a>
+                <a href="#" aria-label="Carrito de compras"><i class="bi bi-cart"></i></a>
+                <!--<i class="bi bi-cart3" style="font-size: 1.5rem;"></i>-->
+                <!--<a href="controller/logout.php" class="bi bi-box-arrow-right">Cerrar Sesión</a>-->
+                <a href="controller/logout.php" aria-label="Cerrar sesión" style="color: white;">
+                    <i class="bi bi-power" style="font-size: 2.0rem;"></i>
+                </a>
+            </div>
+            <!--<div class="collapse navbar-collapse" id="navbarContent">
+
+                <div>
+                    <a href="#" aria-label="Carrito de compras"><i class="bi bi-cart"></i></a>
+                    <a href="#" aria-label="Cerrar sesión"><i class="bi bi-box-arrow-right"></i>Cerrar sesion</a>
+                </div>
+            </div>-->
+        </div>
+    </nav>
+
+
+    <!-- Main Content -->
+
+    <div>
+    <div class="container mt-3">
+        <a href="controller/usercontrolador.php?opcion=volver" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+    </div>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="mb-4">Juguetes</h2>
+                </div>
+                <div class="col-12">
+                    <div class="row" id="product-list">
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 1" data-producto-id="40">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="40"></h5>
+                                    <p class="card-text" data-producto-id="40"></p>
+                                    <p class="product-price" data-producto-id="40"></p>
+                                    <p class="product-discount" data-producto-id="40"></p>
+                                    <a href="view/producto.php?id=40" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 2" data-producto-id="36">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="36"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="36"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="36"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="36"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=36" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 3" data-producto-id="37">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="37"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="37"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="37"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="37"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=37" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 4" data-producto-id="38">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="38"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="38"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="38"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="38"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=38" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 5" data-producto-id="39">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="39"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="39"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="39"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="39"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=39" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 6" data-producto-id="41">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="41"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="41"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="41"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="41"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=41" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 7" data-producto-id="45">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="45"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="45"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="45"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="45"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=45" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 8" data-producto-id="43">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="43"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="43"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="43"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="43"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=43" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 9" data-producto-id="44">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="44"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="44"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="44"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="44"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=44" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <p>© 2025 Juguetería & Novedades Marianita. Variedad al alcance de su bolsillo.</p>
+            <div class="footer-icons">
+                <a target="_blank" href="https://www.facebook.com/profile.php?id=100066757715498" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a target="_blank" href="https://www.tiktok.com/@confiteriamarianita?_t=ZM-8ttYZp03fba&_r=1" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=%2B593999286646&context=ARDuYHFCu7Lh0wtPO6KVw3dnQsxuFUe4sbaDxPoJymtclhx9dNDnWkvdBQvXbt_yUJPryWxZU7tMhTHSeKzwtTxfrm8ZKINThR1d3ISuYtDzHvYnJtkDnGUYnUpNYuECXqHncA9JKgvEMmzPAJdU16dkxA&source=FB_Page&app=facebook&entry_point=page_cta"
+                    aria-label="Instagram"><i class="bi bi-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="./public/js/cargarImagen.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../public/js/index.js"></script>
+    <script src="../public/js/app copy.js"></script>
+</body>
+
+</html>

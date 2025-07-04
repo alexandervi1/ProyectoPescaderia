@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Marianita</title>
+    <!-- Bootstrap ICONS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="public/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <!-- Imagen como logo -->
+            <a class="navbar-brand" href="#">
+                <img src="public/img/Logo.png" alt="Logo Juguetería Marianita" width="200" height="64">
+            </a>
+
+            <!-- BUSQUEDA campo de entrada -->
+            <form class="d-flex mx-auto search-bar" id="search-form">
+                <!-- d-flex: Usa Flexbox (de Bootstrap) para organizar los elementos en fila 
+                id="search-form": Identificador único para manejarlo en JavaScript. 
+                -->
+                <!-- campo de búsqueda -->
+                <input class="form-control me-2" type="search" id="search-input">      
+                <!--form-control: Estiliza el input con Bootstrap.
+                me-2: Margen derecho de 2 unidades para separar del botón. 
+                El usuario ingresa un término en el campo de búsqueda (#search-input).
+                Se activa el formulario de búsqueda (#search-form).
+                type search Específica que el campo es para búsquedas (opcional, pero semántico).
+                 placeholder="Filtrar" Muestra un texto de ayuda antes de que el usuario escriba. 
+                 id="search-input": Permite referenciar el input en scripts.
+                 
+                 --> 
+                <button class="btn btn-outline-light" type="submit">   
+                    <!-- Hace que el botón envíe el formulario. -->
+                    <i class="bi bi-search"></i>
+                </button>
+                <div id="search-suggestions" class="search-suggestions"></div>
+            </form>
+
+
+            <!-- Opciones antes de iniciar sesión -->
+            <div id="guest-options">
+        
+                <a href="./controller/usercontrolador.php?accion=quienes_somos" id="btn-quienes" class="btn btn-link text-light" style=" color: white;">¿Quiénes somos?</a>
+                <button class="btn btn-danger" id="open-login-modal">Iniciar Sesión</button>
+                <a href="#" class="btn btn-primary" id="open-register-modal">Registrarse</a>
+                <a href="./controller/usercontrolador.php?accion=ayuda" id="btn-ayuda" class="btn btn-link text-light" style="color: white;">
+                    <i class="bi bi-question-circle"></i> Ayuda
+                </a>
+                <!--<a href="#" class="btn btn-link text-light" id="open-admin-modal">Administrador</a>-->
+            </div>
+
+            <!-- Opciones después de iniciar sesión -->
+            <div id="user-options">
+                <a href="#" class="d-flex align-items-center text-decoration-none" style="color: white;">
+                    <i class="bi bi-person-circle" style="font-size: 1.5rem; margin-right: 5px;"></i>
+                    <span id="user-name" class="user-info"></span>
+                </a>
+                <a href="view/carrito.php" aria-label="Carrito de compras"><i class="bi bi-cart"></i></a>
+                <!--<i class="bi bi-cart3" style="font-size: 1.5rem;"></i>-->
+                <!--<a href="controller/logout.php" class="bi bi-box-arrow-right">Cerrar Sesión</a>-->
+                <a href="controller/logout.php" aria-label="Cerrar sesión" style="color: white;">
+                    <i class="bi bi-power" style="font-size: 2.0rem;"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div>
+        <!--PRODUCTOS PRINCIPALES (MÁS VENDIDOS)-->
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="mb-4">Nuestros Productos</h2>
+                </div>
+                <!-- Placeholder for products -->
+                <div class="col-12">
+                    <div class="row" id="product-list">
+                        <!-- Add your products dynamically or statically here -->
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 1" data-producto-id="17">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="17"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="17"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="17"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="17"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=17" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 2" data-producto-id="18">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="18"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="18"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="18"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="18"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=18" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 3" data-producto-id="19">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="19"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="19"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="19"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="19"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=19" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--PRODUCTOS CON PROMOCIÓN-->
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="mb-4">Promociones</h2>
+                </div>
+                <!-- Placeholder for products -->
+                <div class="col-12">
+                    <div class="row" id="product-list">
+                        <!-- Add your products dynamically or statically here -->
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 1" data-producto-id="35">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="35"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="35"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="35"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="35"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=35" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 2" data-producto-id="16">
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title" data-producto-id="16"></h5>
+                                    <!-- Nombre del producto -->
+                                    <p class="card-text" data-producto-id="16"></p>
+                                    <!-- Aquí se actualizará la descripción -->
+                                    <p class="product-price" data-producto-id="16"></p>
+                                    <!-- Aquí se actualizará el precio -->
+                                    <p class="product-discount" data-producto-id="16"></p>
+                                    <!-- Aquí se actualizará el descuento -->
+                                    <a href="view/producto.php?id=16" class="btn btn-primary">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" alt="Producto 3" data-producto-id="40">
+                                <div class="card-body">
+                                    <div class="card-body" style="padding: 0;">
+                                        <h5 class="card-title" data-producto-id="40"></h5>
+                                        <!-- Nombre del producto -->
+                                        <p class="card-text" data-producto-id="40"></p>
+                                        <!-- Aquí se actualizará la descripción -->
+                                        <p class="product-price" data-producto-id="40"></p>
+                                        <!-- Aquí se actualizará el precio -->
+                                        <p class="product-discount" data-producto-id="40"></p>
+                                        <!-- Aquí se actualizará el descuento -->
+                                        <a href="view/producto.php?id=40" class="btn btn-primary">Comprar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--CATEGORÍAS-->
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="mb-4">CATEGORÍAS</h2>
+                </div>
+                <!-- Placeholder for products -->
+                <div class="col-12">
+                    <div class="row" id="product-list">
+                        <!-- Add your products dynamically or statically here -->
+                        <div class="col-md-4">
+                            <a target="_blank" href="/Jugueteria_Aplis/Juguetes.php" class="cat btn">Juguetes</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a target="_blank" href="./fiesta.php" class="cat btn">Fiesta</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a target="_blank" href="./confiteria.php" class="cat btn">Confiteria</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <p>© 2025 Juguetería & Novedades Marianita. Variedad al alcance de su bolsillo.</p>
+            <div class="footer-icons">
+                <a target="_blank" href="https://www.facebook.com/profile.php?id=100066757715498" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a target="_blank" href="https://www.tiktok.com/@confiteriamarianita?_t=ZM-8ttYZp03fba&_r=1" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=%2B593999286646&context=ARDuYHFCu7Lh0wtPO6KVw3dnQsxuFUe4sbaDxPoJymtclhx9dNDnWkvdBQvXbt_yUJPryWxZU7tMhTHSeKzwtTxfrm8ZKINThR1d3ISuYtDzHvYnJtkDnGUYnUpNYuECXqHncA9JKgvEMmzPAJdU16dkxA&source=FB_Page&app=facebook&entry_point=page_cta"
+                    aria-label="Instagram"><i class="bi bi-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="./public/js/cargarImagen.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="public/js/index.js"></script>
+    <script src="public/js/app.js"></script>
+</body>
+
+</html>
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-login-modal" style="font-weight: bold;">&times;</button>
+            <!-- Botón de cierre -->
+            <center><img src="./public/img/Logo.png" alt="Logo" class="logo" width="200px"></center>
+            <hr>
+            <h3>Iniciar Sesión</h3>
+            <hr>
+            <br>
+            <form id="login-form">
+                <label for="login-usuario">Nombre de Usuario:</label>
+                <input type="text" id="login-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
+
+                <label for="login-password">Contraseña:</label>
+                <input type="password" id="login-password" placeholder="Tu contraseña" required style="width: 300px;">
+
+                <button type="submit" id="login-btn">Ingresar</button>
+                <center>
+                    <p id="register-link">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
+                </center>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-register-modal" style="font-weight: bold;">&times;</button>
+            <!-- Botón de cierre -->
+            <center><img src="./public/img/Logo.png" alt="Logo" class="logo" width="200px"></center>
+            <hr>
+
+            <h3>Registro de Clientes</h3>
+            <hr>
+            <br>
+            <form id="register-form">
+                <label for="register-nombre">Nombre Completo:</label>
+                <input type="text" id="register-nombre" placeholder="Tu nombre completo" required style="width: 300px;">
+
+                <label for="register-usuario">Nombre de Usuario:</label>
+                <input type="text" id="register-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
+
+                <label for="register-password">Contraseña:</label>
+                <input type="password" id="register-password" placeholder="Tu contraseña" required style="width: 300px;">
+
+                <button type="submit" id="register-btn">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Modal de Login para Administrador (eliminar ya no funciona en el nuevo inicio de sesion)-->
+    <div id="admin-login-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-admin-modal">&times;</button>
+            <center><img src="./public/img/Logo.png" alt="Logo" class="logo" width="200px"></center>
+            <hr>
+            <h3>Acceso Administrador</h3>
+            <hr>
+            <br>
+            <form id="admin-login-form">
+                <label for="admin-usuario">Usuario Administrador:</label>
+                <input type="text" id="admin-usuario" placeholder="Usuario" required style="width: 300px;">
+
+                <label for="admin-password">Contraseña:</label>
+                <input type="password" id="admin-password" placeholder="Contraseña" required style="width: 300px;">
+
+                <button type="submit" id="admin-login-btn">Ingresar</button>
+            </form>
+        </div>
+    </div>
