@@ -1,3 +1,15 @@
+    .btn.btn-pdf {
+    background-color: #1a519d; /* azul personalizado */
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+
+}
+
+.btn-pdf:hover {
+    background-color: #002e5d; /* azul más oscuro al pasar el mouse */
+    color: white;
+}
     body {
         height: 100%;
         margin: 0;
@@ -253,3 +265,26 @@
             /* Aumenta el tamaño en pantallas grandes */
         }
     }
+.btn-ingreso{
+
+    background-color: #002e5d; /* azul personalizado */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+    .btnInsert {
+    background-color: #1a519d; /* azul personalizado */
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px 60px;
+    border-radius: 5px;
+
+}
+
+.btnInsert:hover {
+    background-color: #002e5d; /* azul más oscuro al pasar el mouse */
+    color: white;
+}

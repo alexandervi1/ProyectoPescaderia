@@ -37,8 +37,8 @@ require_once __DIR__ . '/controller/UsuarioController.php';
             <div class="row">
                 <div title="Listado de productos, opciones de Filtrado Edición Eliminación" class="col-md-3 mb-3">
                     <a class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height" href="./controller/adminControlador.php?opcion=1">
-                        <img src="public/img/icons/icoGestCli.png" alt="imagen no disponible" class="img-fluid mb-2 custom-img">
-                        Gestionar Clientes
+                        <img src="public/img/icons/icoGestProd.png" alt="imagen no disponible" class="img-fluid mb-2 custom-img">
+                        Gestionar Productos
                     </a>
                 </div>
                 <div title="Registrar Nuevos Productos en inventario" class="col-md-3 mb-3">

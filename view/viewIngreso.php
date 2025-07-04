@@ -18,7 +18,7 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
         <div class="top-bar">INSERTAR PRODUCTO</div>
         <div class="header-content">
             <div class="logo">
-                <img src="../img/lg5.png" alt="Logo Marianita">
+                <img src="../public/img/Pescaderia Don Walter logo.png" alt="Logo Pescadería Don Walter" class="logo-img">
             </div>
             <h1 class="title">Administrador: <?php echo htmlspecialchars($nombreAdministrador); ?></h1>
         </div>
@@ -69,7 +69,7 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
                             <label for="imagenProducto">Imagen</label>
                             <input type="file" name="imagenProducto" id="imagenProducto" class="form-control bg-white text-purple" accept="image/*" required>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100" value="Insertar">Insertar</button>
+                        <button type="submit" class="btnInsert" value="Insertar">Insertar</button>
                     </form>
                 </div>
             </div>

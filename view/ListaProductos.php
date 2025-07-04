@@ -18,7 +18,7 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
         <div class="top-bar">LISTA DE PRODUCTOS</div>
         <div class="header-content">
             <div class="logo">
-                <img src="../img/lg5.png" alt="Logo Marianita">
+                <img src="../public/img/Pescaderia Don Walter logo.png" alt="Logo Marianita">
             </div>
             <input type="text" id="buscador" class="form-control w-25 d-block" placeholder="Buscar producto...">
             <h1 class="title">Administrador: <?php echo htmlspecialchars($nombreAdministrador); ?></h1>
@@ -59,14 +59,16 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
     </main>
 
     <div class="text-center my-3">
-    <a href="../model/MReporteListaProductos.php" class="btn btn-primary">Generar Documento PDF</a>
-    <a href="../Administrador.php" class="btn btn-danger">Regresar</a>
+    <a href="../model/MReporteListaProductos.php" class="btn btn-pdf">Generar Documento PDF</a>
+    <a href="../controller/adminControlador.php?opcion=2" class="btn-ingreso">Ingresar Nuevo Producto</a>
+    <a href="../Administrador.php" class="btn btn-warning">Regresar</a>
 </div>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>Contactos: 0994745362</p>
-            <p>Dirección: Argentinos y Nueva York - Riobamba</p>
+    <footer class="footer mt-5">
+        <div class="container text-center">
+            <p>Soporte: 0992714396</p>
+
+            </div>
         </div>
     </footer>
 
