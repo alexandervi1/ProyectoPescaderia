@@ -27,19 +27,33 @@ CREATE TABLE usuario (
   contraseña VARCHAR(255) NOT NULL,
   rol_id INT(11),
   direccion VARCHAR(100) NOT NULL,
-  correo VARCHAR(100)NOT NULL,
+  correo VARCHAR(100) NOT NULL,
   telefono VARCHAR(10),
   PRIMARY KEY (usuario_id),
   KEY (rol_id),
   CONSTRAINT fk_usuario_rol FOREIGN KEY (rol_id) REFERENCES rol(rol_id) ON DELETE SET NULL
 );
 
-INSERT INTO usuario (usuario_id, nombre_usuario, nombre_completo, contraseña, rol_id,direccion,correo,telefono) VALUES
-(1, 'admin123', 'Marizta Rosero', '$2y$10$wDkh9Y3evZXdG8EZYNvOoerzp8pUSnEPR785STqY1KYm8E94J0eTC', 1,'Av.canonigo Ramos y 11 de noviembre','maritza@gmail.com','0992470053'),
-(2, 'visitante', 'visitante', 'visitante', 3,'calle 2','visitante@gmail.com','0987877841');
+INSERT INTO usuario (usuario_id, nombre_usuario, nombre_completo, contraseña, rol_id, direccion, correo, telefono) VALUES
+(1, 'admin123', 'Marizta Rosero', '$2y$10$wDkh9Y3evZXdG8EZYNvOoerzp8pUSnEPR785STqY1KYm8E94J0eTC', 1, 'Av.canonigo Ramos y 11 de noviembre', 'maritza@gmail.com', '0992470053'),
+(2, 'visitante', 'visitante', 'visitante', 3, 'calle 2', 'visitante@gmail.com', '0987877841');
 
 -- ================================================
--- 3. TABLA: categoria
+-- 3. TABLA: unidad_medida
+-- ================================================
+CREATE TABLE unidad_medida (
+  unidad_id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL,
+  abreviatura VARCHAR(10) NOT NULL
+);
+
+INSERT INTO unidad_medida (nombre, abreviatura) VALUES
+('Tonelada', 'Tn'),
+('Libra', 'lb'),
+('Unidad', 'u');
+
+-- ================================================
+-- 4. TABLA: categoria
 -- ================================================
 CREATE TABLE categoria (
   categoria_id INT(11) NOT NULL AUTO_INCREMENT,
@@ -53,24 +67,28 @@ INSERT INTO categoria (categoria_id, nombre) VALUES
 (3, 'PulposCalamares');
 
 -- ================================================
--- 4. TABLA: producto
+-- 5. TABLA: producto
 -- ================================================
 CREATE TABLE producto (
   producto_id INT(11) NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(255) NOT NULL,
   descripcion TEXT DEFAULT NULL,
   precio DECIMAL(10,2) NOT NULL,
-  stock INT(11) NOT NULL,
+  stock DECIMAL(10,4) NOT NULL,
   imagen_url VARCHAR(255) DEFAULT NULL,
   categoria_id INT(11),
-  unidadMedida VARCHAR(20) NOT NULL DEFAULT '',
+  unidad_compra_id INT,
+  unidad_venta_id INT,
+  factor_conversion DECIMAL(10,4) DEFAULT 1.0000,
   PRIMARY KEY (producto_id),
   KEY (categoria_id),
-  CONSTRAINT fk_producto_categoria FOREIGN KEY (categoria_id) REFERENCES categoria(categoria_id) ON DELETE SET NULL
+  CONSTRAINT fk_producto_categoria FOREIGN KEY (categoria_id) REFERENCES categoria(categoria_id) ON DELETE SET NULL,
+  CONSTRAINT fk_producto_ucompra FOREIGN KEY (unidad_compra_id) REFERENCES unidad_medida(unidad_id),
+  CONSTRAINT fk_producto_uventa FOREIGN KEY (unidad_venta_id) REFERENCES unidad_medida(unidad_id)
 );
 
 -- ================================================
--- 5. TABLA: pedido
+-- 6. TABLA: pedido
 -- ================================================
 CREATE TABLE pedido (
   pedido_id INT(11) NOT NULL AUTO_INCREMENT,
@@ -83,12 +101,12 @@ CREATE TABLE pedido (
 );
 
 -- ================================================
--- 6. TABLA: pedidoproducto
+-- 7. TABLA: pedidoproducto
 -- ================================================
 CREATE TABLE pedidoproducto (
   pedido_id INT(11) NOT NULL,
   producto_id INT(11) NOT NULL,
-  cantidad INT(11) NOT NULL,
+  cantidad DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (pedido_id, producto_id),
   KEY fk_producto_id (producto_id),
   CONSTRAINT fk_pedidoproducto_pedido FOREIGN KEY (pedido_id) REFERENCES pedido(pedido_id) ON DELETE CASCADE,
@@ -96,7 +114,7 @@ CREATE TABLE pedidoproducto (
 );
 
 -- ================================================
--- 7. TRIGGER: Actualizar total del pedido automáticamente
+-- 8. TRIGGER: Actualizar total del pedido automáticamente
 -- ================================================
 DELIMITER $$
 
@@ -112,6 +130,33 @@ BEGIN
     WHERE pp.pedido_id = NEW.pedido_id
   )
   WHERE pedido_id = NEW.pedido_id;
+END$$
+
+-- ================================================
+-- 9. TRIGGER: Descontar del stock automáticamente según unidad
+-- ================================================
+CREATE TRIGGER trg_DescontarStock
+AFTER INSERT ON pedidoproducto
+FOR EACH ROW
+BEGIN
+  DECLARE unidad_compra INT;
+  DECLARE unidad_venta INT;
+  DECLARE factor DECIMAL(10,4);
+
+  SELECT unidad_compra_id, unidad_venta_id, factor_conversion
+  INTO unidad_compra, unidad_venta, factor
+  FROM producto
+  WHERE producto_id = NEW.producto_id;
+
+  IF unidad_compra = unidad_venta THEN
+    UPDATE producto
+    SET stock = stock - NEW.cantidad
+    WHERE producto_id = NEW.producto_id;
+  ELSE
+    UPDATE producto
+    SET stock = stock - (NEW.cantidad / factor)
+    WHERE producto_id = NEW.producto_id;
+  END IF;
 END$$
 
 DELIMITER ;
