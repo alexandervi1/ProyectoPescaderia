@@ -6,16 +6,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $descripcion = $_POST['descripcionProducto'];
     $precio = $_POST['precioProducto'];
     $stock = $_POST['cantidadProducto'];
-    $descuento = $_POST['descuentoProducto'];
+    // La columna 'descuento' no existe en la tabla 'producto', por lo tanto, se ha eliminado.
     $categoria_id = $_POST['categoriaProducto'];
+    $unidad_compra_id = $_POST['unidadCompraProducto']; // Asumiendo que viene del formulario
+    $unidad_venta_id = $_POST['unidadVentaProducto'];   // Asumiendo que viene del formulario
 
     // Validaciones del lado del servidor
-    if ($descuento < 0 || $precio < 0 || $stock < 0) {
-        header("Location: ../view/viewIngreso.php?status=error&message=Valores negativos no permitidos.");
+    // Se ha eliminado la validación de descuento ya que la columna no existe.
+    if ($precio < 0 || $stock < 0) {
+        header("Location: ../view/viewIngreso.php?status=error&message=Valores negativos no permitidos para precio o stock.");
         exit;
     }
 
     // Manejo de la subida de la imagen
+    $imagen_url = NULL; // Inicializar a NULL por si no se sube imagen
     if (isset($_FILES['imagenProducto']) && $_FILES['imagenProducto']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['imagenProducto']['tmp_name'];
         $fileName = $_FILES['imagenProducto']['name'];
@@ -45,19 +49,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
     } else {
-        header("Location: ../view/viewIngreso.php?status=error&message=Hubo un error en la subida del archivo.");
-        exit;
+        // Si no se sube una imagen o hay un error, se puede dejar imagen_url como NULL (si la columna lo permite)
+        // o manejarlo según tu lógica de negocio.
+        // header("Location: ../view/viewIngreso.php?status=error&message=Hubo un error en la subida del archivo o no se seleccionó ninguno.");
+        // exit; // Descomentar si la imagen es obligatoria
     }
 
     // Inserción de datos en la base de datos
-    $query = "INSERT INTO producto (nombre, descripcion, precio, stock, descuento, imagen_url, categoria_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    // Se han añadido unidad_compra_id y unidad_venta_id, y se ha eliminado descuento.
+    $query = "INSERT INTO producto (nombre, descripcion, precio, stock, imagen_url, categoria_id, unidad_compra_id, unidad_venta_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    // s: nombre (string)
+    // s: descripcion (string)
+    // d: precio (decimal)
+    // d: stock (decimal)
+    // s: imagen_url (string)
+    // i: categoria_id (integer)
+    // i: unidad_compra_id (integer)
+    // i: unidad_venta_id (integer)
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssdiiss", $nombre, $descripcion, $precio, $stock, $descuento, $imagen_url, $categoria_id);
+    $stmt->bind_param("ssddisii", $nombre, $descripcion, $precio, $stock, $imagen_url, $categoria_id, $unidad_compra_id, $unidad_venta_id);
 
     if ($stmt->execute()) {
         header("Location: ../view/viewIngreso.php?status=success&message=Producto ingresado exitosamente.");
     } else {
-        header("Location: ../view/viewIngreso.php?status=error&message=Hubo un error al ingresar el producto en la base de datos.");
+        // Se añade $stmt->error para depuración
+        header("Location: ../view/viewIngreso.php?status=error&message=Hubo un error al ingresar el producto en la base de datos: " . $stmt->error);
     }
 
     // Cerrar la conexión

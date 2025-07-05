@@ -42,15 +42,13 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
                             <input type="text" name="nombreProducto" id="nombreProducto" class="form-control bg-white text-purple" required>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="descuentoProducto">Descuento</label>
-                            <input type="number" name="descuentoProducto" id="descuentoProducto" class="form-control bg-white text-purple" min="0" max="100" required>
-                        </div>
-                        <div class="form-group mb-3">
                             <label for="categoriaProducto">Categoría</label>
                             <select name="categoriaProducto" id="categoriaProducto" class="form-control bg-white text-purple" required>
-                                <option value="1">Categoría 1</option>
-                                <option value="2">Categoría 2</option>
-                                <option value="3">Categoría 3</option>
+                                <option value="">Seleccione una categoría</option>
+                                <option value="1">Pescados</option>
+                                <option value="2">Crustaseos</option>
+                                <option value="3">Pulpos y calamares</option>
+                                <!-- Aquí deberías cargar las categorías dinámicamente desde la base de datos -->
                             </select>
                         </div>
                         <div class="form-group mb-3">
@@ -62,8 +60,28 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
                             <input type="number" name="precioProducto" id="precioProducto" class="form-control bg-white text-purple" min="0" step="0.01" required>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="cantidadProducto">Cantidad</label>
+                            <label for="cantidadProducto">Cantidad (Stock)</label>
                             <input type="number" name="cantidadProducto" id="cantidadProducto" class="form-control bg-white text-purple" min="0" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="unidadCompraProducto">Unidad de Compra</label>
+                            <select name="unidadCompraProducto" id="unidadCompraProducto" class="form-control bg-white text-purple" required>
+                                <option value="">Seleccione unidad de compra</option>
+                                <option value="1">Kilogramos</option>
+                                <option value="2">Libras</option>
+                                <option value="3">Unidades</option>
+                                <!-- Aquí deberías cargar las unidades de medida dinámicamente desde la base de datos -->
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="unidadVentaProducto">Unidad de Venta</label>
+                            <select name="unidadVentaProducto" id="unidadVentaProducto" class="form-control bg-white text-purple" required>
+                                <option value="">Seleccione unidad de venta</option>
+                                <option value="1">Kilogramos</option>
+                                <option value="2">Libras</option>
+                                <option value="3">Unidades</option>
+                                <!-- Aquí deberías cargar las unidades de medida dinámicamente desde la base de datos -->
+                            </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="imagenProducto">Imagen</label>
@@ -108,14 +126,9 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function validarFormulario() {
-            const descuento = document.getElementById('descuentoProducto').value;
+            // Eliminada la validación de descuento ya que el campo fue removido del formulario.
             const precio = document.getElementById('precioProducto').value;
             const cantidad = document.getElementById('cantidadProducto').value;
-
-            if (descuento < 0) {
-                alert('El descuento no puede ser negativo.');
-                return false;
-            }
 
             if (precio < 0) {
                 alert('El precio no puede ser negativo.');
@@ -123,7 +136,7 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
             }
 
             if (cantidad < 0) {
-                alert('La cantidad no puede ser negativa.');
+                alert('La cantidad (stock) no puede ser negativa.');
                 return false;
             }
 
