@@ -25,21 +25,10 @@
 
             <!-- BUSQUEDA campo de entrada -->
             <form class="d-flex mx-auto search-bar" id="search-form">
-                <!-- d-flex: Usa Flexbox (de Bootstrap) para organizar los elementos en fila 
-                id="search-form": Identificador único para manejarlo en JavaScript. 
-                -->
-                <!-- campo de búsqueda -->
-                <input class="form-control me-2" type="search" id="search-input">      
-                <!--form-control: Estiliza el input con Bootstrap.
-                me-2: Margen derecho de 2 unidades para separar del botón. 
-                El usuario ingresa un término en el campo de búsqueda (#search-input).
-                Se activa el formulario de búsqueda (#search-form).
-                type search Específica que el campo es para búsquedas (opcional, pero semántico).
-                 placeholder="Filtrar" Muestra un texto de ayuda antes de que el usuario escriba. 
-                 id="search-input": Permite referenciar el input en scripts.
-                 
-                 --> 
-                <button class="btn btn-outline-light" type="submit">   
+                
+                <input class="form-control me-2" type="search" id="search-input"placeholder="Filtrar...">      
+            
+                <button class="btn btn-outline-light"  type="button" id="search-button">   
                     <!-- Hace que el botón envíe el formulario. -->
                     <i class="bi bi-search"></i>
                 </button>
@@ -166,11 +155,12 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer mt-5">
-        <div class="container">
-            <p>© 2025 Juguetería & Novedades Marianita. Variedad al alcance de su bolsillo.</p>
+ <footer class="footer mt-5">
+        <div class="container text-center">
+            <p>Contacto: 09924700553-0982744920</p>
+            <p>Dirección: Av. Canonigo Ramos y Av.11 de Noviembre y  - Riobamba</p>
             <div class="footer-icons">
-                <a target="_blank" href="https://www.facebook.com/profile.php?id=100066757715498" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a target="_blank" href="https://www.facebook.com/profile.php?id=100066757715498" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
                 <a target="_blank" href="https://www.tiktok.com/@confiteriamarianita?_t=ZM-8ttYZp03fba&_r=1" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
                 <a target="_blank" href="https://api.whatsapp.com/send?phone=%2B593999286646&context=ARDuYHFCu7Lh0wtPO6KVw3dnQsxuFUe4sbaDxPoJymtclhx9dNDnWkvdBQvXbt_yUJPryWxZU7tMhTHSeKzwtTxfrm8ZKINThR1d3ISuYtDzHvYnJtkDnGUYnUpNYuECXqHncA9JKgvEMmzPAJdU16dkxA&source=FB_Page&app=facebook&entry_point=page_cta"
                     aria-label="Instagram"><i class="bi bi-whatsapp"></i></a>

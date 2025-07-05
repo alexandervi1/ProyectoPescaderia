@@ -3,7 +3,11 @@
 require_once '../config/confConexion.php';
 require_once '../model/mObtDatosProducto.php';
 // Obtener el ID del producto desde la URL
+if (!isset($_GET['id'])) {
+    die('Error: ID de producto no especificado.');
+}
 $producto_id = $_GET['id'];
+
 // Obtener los datos del producto desde la base de datos
 $producto = obtenerDatosProducto($producto_id);
 if (!$producto) {
@@ -62,7 +66,7 @@ if (!$producto) {
         <div class="container">
             <!-- Imagen como logo -->
             <a class="navbar-brand" href="../index.html">
-                <img src="../public/img/Logo.png" alt="Logo Juguetería Marianita" width="200" height="64">
+                <img src="../public/img/Pescaderia Don Walter logo.png" alt="Logo Pescaderia Don Walter" width="200" height="64">
             </a>
           
             <!-- Opciones antes de iniciar sesión -->
@@ -134,12 +138,14 @@ if (!$producto) {
         </div>
     </div>
     <footer class="footer mt-5">
-        <div class="container">
-            <p>© 2025 Juguetería & Novedades Marianita. Variedad al alcance de su bolsillo.</p>
+        <div class="container text-center">
+            <p>Contacto: 09924700553-0982744920</p>
+            <p>Dirección: Av. Canonigo Ramos y Av.11 de Noviembre y  - Riobamba</p>
             <div class="footer-icons">
-                <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-                <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a target="_blank" href="https://www.facebook.com/profile.php?id=100066757715498" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a target="_blank" href="https://www.tiktok.com/@confiteriamarianita?_t=ZM-8ttYZp03fba&_r=1" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=%2B593999286646&context=ARDuYHFCu7Lh0wtPO6KVw3dnQsxuFUe4sbaDxPoJymtclhx9dNDnWkvdBQvXbt_yUJPryWxZU7tMhTHSeKzwtTxfrm8ZKINThR1d3ISuYtDzHvYnJtkDnGUYnUpNYuECXqHncA9JKgvEMmzPAJdU16dkxA&source=FB_Page&app=facebook&entry_point=page_cta"
+                    aria-label="Instagram"><i class="bi bi-whatsapp"></i></a>
             </div>
         </div>
     </footer>

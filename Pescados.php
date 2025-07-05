@@ -15,61 +15,12 @@
 
 <body>
 
-    <!-- Modal de Login -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" id="close-login-modal">&times;</button>
-            <!-- Botón de cierre -->
-            <center><img src="./public/img/Logo.png" alt="Logo" class="logo" width="200px"></center>
-            <hr>
-            <h3>Iniciar Sesión</h3>
-            <hr>
-            <br>
-            <form id="login-form">
-                <label for="login-usuario">Nombre de Usuario:</label>
-                <input type="text" id="login-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
-
-                <label for="login-password">Contraseña:</label>
-                <input type="password" id="login-password" placeholder="Tu contraseña" required style="width: 300px;">
-
-                <button type="submit" id="login-btn">Ingresar</button>
-                <center>
-                    <p id="register-link">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
-                </center>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal de Registro -->
-    <div id="register-modal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" id="close-register-modal">&times;</button>
-            <hr>
-            <h3>Registro</h3>
-            <hr>
-            <br>
-            <form id="register-form">
-                <label for="register-nombre">Nombre Completo:</label>
-                <input type="text" id="register-nombre" placeholder="Tu nombre completo" required style="width: 300px;">
-
-                <label for="register-usuario">Nombre de Usuario:</label>
-                <input type="text" id="register-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
-
-                <label for="register-password">Contraseña:</label>
-                <input type="password" id="register-password" placeholder="Tu contraseña" required style="width: 300px;">
-
-                <button type="submit" id="register-btn">Registrarse</button>
-            </form>
-        </div>
-    </div>
-
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <!-- Imagen como logo -->
             <a class="navbar-brand" href="#">
-                <img src="public/img/Logo.png" alt="Logo Juguetería Marianita" width="200" height="64">
+                <img src="public/img/Pescaderia Don Walter logo.png" alt="Logo Pescaderia Don Walter" width="200" height="64">
             </a>
 
             <!-- Barra de búsqueda -->
@@ -82,12 +33,16 @@
             </form>
 
             <!-- Opciones antes de iniciar sesión -->
-            <div id="guest-options">
+           <div id="guest-options">
+        
                 <a href="./controller/usercontrolador.php?accion=quienes_somos" id="btn-quienes" class="btn btn-link text-light" style=" color: white;">¿Quiénes somos?</a>
                 <button class="btn btn-danger" id="open-login-modal">Iniciar Sesión</button>
                 <a href="#" class="btn btn-primary" id="open-register-modal">Registrarse</a>
+               
+                <!--<a href="#" class="btn btn-link text-light" id="open-admin-modal">Administrador</a>-->
             </div>
 
+            
             <!-- Opciones después de iniciar sesión -->
             <div id="user-options">
                 <a href="#" style="color: white;">
@@ -123,7 +78,7 @@
         <div class="container mt-4">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h2 class="mb-4">Juguetes</h2>
+                    <h2 class="mb-4">Pescados</h2>
                 </div>
                 <div class="col-12">
                     <div class="row" id="product-list">
@@ -281,10 +236,11 @@
     </div>
     <!-- Footer -->
     <footer class="footer mt-5">
-        <div class="container">
-            <p>© 2025 Juguetería & Novedades Marianita. Variedad al alcance de su bolsillo.</p>
+        <div class="container text-center">
+            <p>Contacto: 09924700553-0982744920</p>
+            <p>Dirección: Av. Canonigo Ramos y Av.11 de Noviembre y  - Riobamba</p>
             <div class="footer-icons">
-                <a target="_blank" href="https://www.facebook.com/profile.php?id=100066757715498" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a target="_blank" href="https://www.facebook.com/profile.php?id=100066757715498" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
                 <a target="_blank" href="https://www.tiktok.com/@confiteriamarianita?_t=ZM-8ttYZp03fba&_r=1" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
                 <a target="_blank" href="https://api.whatsapp.com/send?phone=%2B593999286646&context=ARDuYHFCu7Lh0wtPO6KVw3dnQsxuFUe4sbaDxPoJymtclhx9dNDnWkvdBQvXbt_yUJPryWxZU7tMhTHSeKzwtTxfrm8ZKINThR1d3ISuYtDzHvYnJtkDnGUYnUpNYuECXqHncA9JKgvEMmzPAJdU16dkxA&source=FB_Page&app=facebook&entry_point=page_cta"
                     aria-label="Instagram"><i class="bi bi-whatsapp"></i></a>
@@ -296,6 +252,58 @@
 
     <script src="../public/js/index.js"></script>
     <script src="../public/js/app copy.js"></script>
+    <script src="/public/js/app.js"></script>
 </body>
 
 </html>
+
+<!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-login-modal" style="font-weight: bold;">&times;</button>
+            <!-- Botón de cierre -->
+            <center><img src="./public/img/Pescaderia Don Walter logo.png" alt="Logo" class="logo" width="200px"></center>
+            <hr>
+            <h3>Iniciar Sesión</h3>
+            <hr>
+            <br>
+            <form id="login-form">
+                <label for="login-usuario">Nombre de Usuario:</label>
+                <input type="text" id="login-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
+
+                <label for="login-password">Contraseña:</label>
+                <input type="password" id="login-password" placeholder="Tu contraseña" required style="width: 300px;">
+
+                <button class= "btn_loguin" type="submit" id="login-btn">Ingresar</button>
+                <center>
+                    <p id="register-link">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
+                </center>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-register-modal" style="font-weight: bold;">&times;</button>
+            <!-- Botón de cierre -->
+            <center><img src="./public/img/Pescaderia Don Walter logo.png" alt="Logo" class="logo" width="200px"></center>
+            <hr>
+
+            <h3>Registro de Clientes</h3>
+            <hr>
+            <br>
+            <form id="register-form">
+                <label for="register-nombre">Nombre Completo:</label>
+                <input type="text" id="register-nombre" placeholder="Tu nombre completo" required style="width: 300px;">
+
+                <label for="register-usuario">Nombre de Usuario:</label>
+                <input type="text" id="register-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
+
+                <label for="register-password">Contraseña:</label>
+                <input type="password" id="register-password" placeholder="Tu contraseña" required style="width: 300px;">
+
+                <button type="submit" id="register-btn">Registrarse</button>
+            </form>
+        </div>
+    </div>

@@ -20,7 +20,7 @@
         <div class="modal-content">
             <button class="close-modal" id="close-login-modal">&times;</button>
             <!-- Botón de cierre -->
-            <center><img src="./public/img/Logo.png" alt="Logo" class="logo" width="200px"></center>
+            <center><img src="./public/img/Pescaderia Don Walter logo.png" alt="Logo" class="logo" width="200px"></center>
             <hr>
             <h3>Iniciar Sesión</h3>
             <hr>
@@ -40,35 +40,14 @@
         </div>
     </div>
 
-    <!-- Modal de Registro -->
-    <div id="register-modal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" id="close-register-modal">&times;</button>
-            <hr>
-            <h3>Registro</h3>
-            <hr>
-            <br>
-            <form id="register-form">
-                <label for="register-nombre">Nombre Completo:</label>
-                <input type="text" id="register-nombre" placeholder="Tu nombre completo" required style="width: 300px;">
-
-                <label for="register-usuario">Nombre de Usuario:</label>
-                <input type="text" id="register-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
-
-                <label for="register-password">Contraseña:</label>
-                <input type="password" id="register-password" placeholder="Tu contraseña" required style="width: 300px;">
-
-                <button type="submit" id="register-btn">Registrarse</button>
-            </form>
-        </div>
-    </div>
+   
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <!-- Imagen como logo -->
             <a class="navbar-brand" href="#">
-                <img src="public/img/Logo.png" alt="Logo Juguetería Marianita" width="200" height="64">
+                <img src="public/img/Pescaderia Don Walter logo.png" alt="Logo Pescaderia Don Walter" width="200" height="64">
             </a>
 
             <!-- Barra de búsqueda -->
@@ -279,10 +258,11 @@
     </div>
     <!-- Footer -->
     <footer class="footer mt-5">
-        <div class="container">
-            <p>© 2025 Juguetería & Novedades Marianita. Variedad al alcance de su bolsillo.</p>
+        <div class="container text-center">
+            <p>Contacto: 09924700553-0982744920</p>
+            <p>Dirección: Av. Canonigo Ramos y Av.11 de Noviembre y  - Riobamba</p>
             <div class="footer-icons">
-                <a target="_blank" href="https://www.facebook.com/profile.php?id=100066757715498" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a target="_blank" href="https://www.facebook.com/profile.php?id=100066757715498" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
                 <a target="_blank" href="https://www.tiktok.com/@confiteriamarianita?_t=ZM-8ttYZp03fba&_r=1" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
                 <a target="_blank" href="https://api.whatsapp.com/send?phone=%2B593999286646&context=ARDuYHFCu7Lh0wtPO6KVw3dnQsxuFUe4sbaDxPoJymtclhx9dNDnWkvdBQvXbt_yUJPryWxZU7tMhTHSeKzwtTxfrm8ZKINThR1d3ISuYtDzHvYnJtkDnGUYnUpNYuECXqHncA9JKgvEMmzPAJdU16dkxA&source=FB_Page&app=facebook&entry_point=page_cta"
                     aria-label="Instagram"><i class="bi bi-whatsapp"></i></a>
@@ -297,3 +277,26 @@
 </body>
 
 </html>
+
+ <!-- Modal de Registro -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-register-modal">&times;</button>
+            <hr>
+            <h3>Registro</h3>
+            <hr>
+            <br>
+            <form id="register-form">
+                <label for="register-nombre">Nombre Completo:</label>
+                <input type="text" id="register-nombre" placeholder="Tu nombre completo" required style="width: 300px;">
+
+                <label for="register-usuario">Nombre de Usuario:</label>
+                <input type="text" id="register-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
+
+                <label for="register-password">Contraseña:</label>
+                <input type="password" id="register-password" placeholder="Tu contraseña" required style="width: 300px;">
+
+                <button type="submit" id="register-btn">Registrarse</button>
+            </form>
+        </div>
+    </div>
