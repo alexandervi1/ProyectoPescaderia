@@ -11,16 +11,16 @@ if (isset($_GET['usuario_id'])) {
 
     if ($stmt->execute()) {
         // Redirigir de vuelta a la lista de clientes con un mensaje de éxito
-        header("Location: ../view/ListaClientes.php?success=deleted");
+        header("Location: ../view/ListarClientes.php?success=deleted");
     } else {
         // Redirigir con un mensaje de error
-        header("Location: ../view/ListaClientes.php?error=delete_failed");
+        header("Location: ../view/ListarClientes.php?error=delete_failed");
     }
 
     $stmt->close();
 } else {
     // Si no se proporcionó un ID, redirigir a la lista con un error
-    header("Location: ../view/ListaClientes.php?error=no_id");
+    header("Location: ../view/ListarClientes.php?error=no_id");
 }
 
 $conn->close();

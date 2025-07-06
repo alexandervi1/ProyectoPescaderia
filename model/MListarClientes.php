@@ -48,7 +48,7 @@ if ($resultado) {
                     </a>
                 </td>
                 <td>
-                    <a href="../Model/MEliminarCliente_id.php?usuario_id=<?php echo htmlspecialchars($mostrar['usuario_id']); ?>"
+                    <a href="../model/MEliminarClientes_id.php?usuario_id=<?php echo htmlspecialchars($mostrar['usuario_id']); ?>"
                        class="btn btn-danger btn-sm"
                        title="Eliminar Cliente"
                        onclick="return confirm('¿Estás seguro de que quieres eliminar este cliente? Esta acción es irreversible.');">
