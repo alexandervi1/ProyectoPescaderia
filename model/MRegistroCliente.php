@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rol_id = 2; // Por defecto, los nuevos registros son clientes
 
     // 2. Validar que los campos obligatorios no estén vacíos
-    if (empty($nombreCompleto) || empty($usuario) || empty($password) || empty($direccion) || empty(trim($correo))) { // Añadido trim para correo
+    if (empty($nombreCompleto) || empty($usuario) || empty($password) || empty($direccion) || empty(trim($correo))) {
         echo json_encode(["success" => false, "message" => "Por favor, complete todos los campos obligatorios."]);
         exit;
     }
@@ -60,35 +60,122 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt_insert_user->bind_param("sssisss", $usuario, $nombreCompleto, $hashedPassword, $rol_id, $direccion, $correo, $telefono);
 
     if ($stmt_insert_user->execute()) {
-        // --- ¡CAMBIO CLAVE AQUÍ! ---
-        // Si el registro es exitoso, redirige directamente a una página de éxito (o genera HTML aquí mismo)
-        // Para simplicidad, generaremos HTML directamente aquí.
-        // Establece el encabezado de tipo de contenido a HTML.
+        // --- PARTE HTML MEJORADA PARA REGISTRO EXITOSO CON EL COLOR #1A519D ---
         header('Content-Type: text/html; charset=utf-8');
+        ?>
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Registro Exitoso - Pescadería Don Walter</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+            <style>
+                body {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 100vh;
+                    /* Fondo con el color #1A519D */
+                    background: linear-gradient(to right, #1A519D, #3A6CA8); 
+                    font-family: 'Roboto', sans-serif;
+                }
+                .success-card {
+                    background-color: #ffffff;
+                    padding: 50px;
+                    border-radius: 15px;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                    text-align: center;
+                    max-width: 500px;
+                    width: 90%;
+                    animation: fadeIn 1s ease-out;
+                }
+                .success-card .icon {
+                    font-size: 5rem;
+                    color: #28a745; /* Verde de éxito para el icono */
+                    margin-bottom: 25px;
+                    animation: bounceIn 1s;
+                }
+                .success-card h1 {
+                    color: #1A519D; /* Título con el color #1A519D */
+                    margin-bottom: 15px;
+                    font-size: 2.5em;
+                    font-weight: bold;
+                }
+                .success-card p {
+                    color: #6c757d;
+                    font-size: 1.1em;
+                    margin-bottom: 40px;
+                    line-height: 1.6;
+                }
+                .success-card .btn-primary {
+                    background-color: #1A519D; /* Botón con el color #1A519D */
+                    border-color: #1A519D;
+                    padding: 12px 30px;
+                    font-size: 1.1em;
+                    border-radius: 8px;
+                    transition: background-color 0.3s ease, transform 0.3s ease;
+                }
+                .success-card .btn-primary:hover {
+                    background-color: #164282; /* Tono más oscuro para el hover */
+                    border-color: #164282;
+                    transform: translateY(-2px);
+                }
 
-        echo '<!DOCTYPE html>';
-        echo '<html lang="es">';
-        echo '<head>';
-        echo '    <meta charset="UTF-8">';
-        echo '    <meta name="viewport" content="width=device-width, initial-scale=1.0">';
-        echo '    <title>Registro Exitoso</title>';
-        echo '    <link rel="stylesheet" href="../css/bootstrap.min.css">'; // Asegúrate de que esta ruta sea correcta
-        echo '    <style>';
-        echo '        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f8f9fa; }';
-        echo '        .container-message { text-align: center; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }';
-        echo '        .container-message h1 { color: #28a745; margin-bottom: 20px; }';
-        echo '        .container-message p { font-size: 1.1em; margin-bottom: 30px; }';
-        echo '        .container-message .btn { padding: 10px 25px; font-size: 1em; }';
-        echo '    </style>';
-        echo '</head>';
-        echo '<body>';
-        echo '    <div class="container-message">';
-        echo '        <h1>¡Registro Exitoso!</h1>';
-        echo '        <p>Tu cuenta ha sido creada satisfactoriamente. Ya puedes iniciar sesión.</p>';
-        echo '        <a href="../index.html" class="btn btn-primary">Ir a la página principal</a>'; // Ruta correcta al index
-        echo '    </div>';
-        echo '</body>';
-        echo '</html>';
+                /* Animaciones */
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: scale(0.9); }
+                    to { opacity: 1; transform: scale(1); }
+                }
+                @keyframes bounceIn {
+                    0%, 20%, 40%, 60%, 80%, 100% {
+                        -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                        transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                    }
+                    0% {
+                        opacity: 0;
+                        -webkit-transform: scale3d(.3, .3, .3);
+                        transform: scale3d(.3, .3, .3);
+                    }
+                    20% {
+                        -webkit-transform: scale3d(1.1, 1.1, 1.1);
+                        transform: scale3d(1.1, 1.1, 1.1);
+                    }
+                    40% {
+                        -webkit-transform: scale3d(.9, .9, .9);
+                        transform: scale3d(.9, .9, .9);
+                    }
+                    60% {
+                        opacity: 1;
+                        -webkit-transform: scale3d(1.03, 1.03, 1.03);
+                        transform: scale3d(1.03, 1.03, 1.03);
+                    }
+                    80% {
+                        -webkit-transform: scale3d(.97, .97, .97);
+                        transform: scale3d(.97, .97, .97);
+                    }
+                    100% {
+                        opacity: 1;
+                        -webkit-transform: scale3d(1, 1, 1);
+                        transform: scale3d(1, 1, 1);
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="success-card">
+                <div class="icon">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+                <h1>¡Registro Exitoso!</h1>
+                <p>Tu cuenta en Pescadería Don Walter ha sido creada satisfactoriamente. Ahora puedes iniciar sesión para explorar nuestros productos frescos.</p>
+                <a href="../index.html" class="btn btn-primary">Ir a la página principal</a>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        </body>
+        </html>
+        <?php
         exit(); // Crucial para detener la ejecución después de enviar el HTML
 
     } else {
