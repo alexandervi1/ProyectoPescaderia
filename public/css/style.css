@@ -374,3 +374,71 @@ input[type="text"],
 #open-register-modal:hover {
     background-color: #001d3b; /* Tono más oscuro al hacer hover */
 }
+
+/* Estilos para mejorar las tarjetas de productos */
+
+/* Contenedor de la tarjeta para sombras sutiles y bordes redondeados */
+.product-card {
+    border: 1px solid #e0e0e0; /* Borde más suave */
+    border-radius: 8px; /* Bordes ligeramente redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Sombra sutil para profundidad */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Transición suave al pasar el ratón */
+    overflow: hidden; /* Asegura que los bordes redondeados se apliquen a la imagen */
+}
+
+/* Efecto hover para las tarjetas */
+.product-card:hover {
+    transform: translateY(-5px); /* Pequeño levantamiento al pasar el ratón */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada al pasar el ratón */
+}
+
+/* Estilos para la imagen del producto */
+.product-img {
+    width: 100%; /* La imagen ocupa todo el ancho de la tarjeta */
+    height: 200px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Recorta la imagen para que cubra el área sin distorsión */
+    border-top-left-radius: 8px; /* Bordes superiores redondeados para la imagen */
+    border-top-right-radius: 8px;
+}
+
+/* Asegurar que el padding del card-body se vea bien */
+.card-body {
+    padding: 1rem; /* Padding uniforme */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Para que el botón y el precio se empujen hacia los extremos si es necesario */
+}
+
+/* Estilos para el título del producto */
+.card-title {
+    font-size: 1.25rem; /* Tamaño de fuente un poco más grande */
+    color: #333; /* Color de texto más oscuro */
+    margin-bottom: 0.75rem; /* Espacio debajo del título */
+    text-overflow: ellipsis; /* Para textos largos */
+    white-space: nowrap; /* Para textos largos */
+    overflow: hidden; /* Para textos largos */
+}
+
+/* Estilos para el precio del producto */
+.product-price {
+    font-size: 1.5rem; /* Tamaño de fuente más grande para el precio */
+    color: #007bff; /* Color azul para destacar el precio */
+    font-weight: bold; /* Negrita */
+    margin-top: auto; /* Empuja el precio hacia abajo, justo antes del botón */
+    margin-bottom: 1rem; /* Espacio debajo del precio */
+}
+
+/* Estilos para el botón de comprar */
+.btn-primary {
+    width: 80%; /* Ancho del botón */
+    margin-left: auto; /* Centrar el botón */
+    margin-right: auto;
+    display: block; /* Para que margin auto funcione */
+    background-color: #007bff; /* Color azul estándar de Bootstrap */
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}

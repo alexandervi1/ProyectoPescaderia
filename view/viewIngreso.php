@@ -28,7 +28,7 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
 
     <main class="body-central">
     <div class="container mt-3">
-        <a href="javascript:history.back()" class="btn btn-outline-secondary">
+        <a href="../Administrador.php" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left"></i> Volver
         </a>
     </div>
@@ -46,7 +46,7 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
                             <select name="categoriaProducto" id="categoriaProducto" class="form-control bg-white text-purple" required>
                                 <option value="">Seleccione una categoría</option>
                                 <option value="1">Pescados</option>
-                                <option value="2">Crustaseos</option>
+                                <option value="2">Moluscos y Crustaseos</option>
                                 <option value="3">Pulpos y calamares</option>
                                 <!-- Aquí deberías cargar las categorías dinámicamente desde la base de datos -->
                             </select>

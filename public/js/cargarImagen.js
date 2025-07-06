@@ -5,6 +5,7 @@ function cargarImagenesProductos() {
 
     imagenes.forEach(img => {
         const productoId = img.getAttribute("data-producto-id"); // Obtener ID desde el HTML
+        console.log("ID del producto:", productoId);
         if (!productoId) return; // Si no hay ID, no hace nada
 
         // Hacer la petición al servidor
@@ -81,49 +82,6 @@ function cargarNombreProducto() {
 document.addEventListener("DOMContentLoaded", cargarNombreProducto);
 //******************************************************************************************************** */
 
-
-// Función para cargar la descripción del producto automáticamente
-function cargarDescripcionProducto() {
-    // Seleccionar todos los elementos con el atributo `data-producto-id`
-    const productos = document.querySelectorAll("[data-producto-id]");
-
-    productos.forEach(producto => {
-        const productoId = producto.getAttribute("data-producto-id"); // Obtener ID desde el HTML
-        if (!productoId) return; // Si no hay ID, no hace nada
-
-        console.log(`🔍 Realizando la petición para el producto con ID: ${productoId}`);
-
-        // Hacer la petición al servidor para obtener la descripción del producto
-        fetch(`./model/mBuscDescrip.php?id=${productoId}`)
-            .then(response => response.text()) // Obtener la respuesta en texto plano
-            .then(descripcion => {
-                console.log(`🔍 Respuesta del servidor para el producto ${productoId}:`, descripcion);
-
-                if (descripcion.includes("PRODUCTO_NO_ENCONTRADO") || descripcion.includes("ERROR_CONEXION") || descripcion.includes("ID_NOT_PROVIDED")) {
-                    console.error(`❌ Descripción no encontrada para producto ${productoId}`);
-                    // Mostrar mensaje por defecto si no se encuentra la descripción
-                    producto.textContent = "Descripción no disponible";
-                } else {
-                    console.log(`🛍️ Asignando descripción al producto ${productoId}:`, descripcion);
-                    // Seleccionar el elemento de descripción correspondiente y actualizar su contenido
-                    const descripcionProducto = document.querySelector(`p[data-producto-id="${productoId}"]`);
-                    if (descripcionProducto) {
-                        descripcionProducto.textContent = descripcion; // Asignar la descripción al p correspondiente
-                    } else {
-                        console.error(`❌ No se encontró el p correspondiente para el producto ${productoId}`);
-                    }
-                }
-            })
-            .catch(error => {
-                console.error(`❌ Error en la petición para el producto ${productoId}:`, error);
-            });
-    });
-}
-
-// Ejecutar la función al cargar el DOM
-document.addEventListener("DOMContentLoaded", cargarDescripcionProducto);
-//**************************************************************************** */
-
 // Función para cargar el precio del producto automáticamente
 function cargarPrecioProducto() {
     // Seleccionar todos los elementos con el atributo `data-producto-id`
@@ -164,52 +122,6 @@ function cargarPrecioProducto() {
 
 // Ejecutar la función al cargar el DOM
 document.addEventListener("DOMContentLoaded", cargarPrecioProducto);
-
-//*/************************************************************************ */
-
-// Función para cargar el descuento del producto automáticamente
-function cargarDescuentoProducto() {
-    // Seleccionar todos los elementos con el atributo `data-producto-id`
-    const productos = document.querySelectorAll("[data-producto-id]");
-
-    productos.forEach(producto => {
-        const productoId = producto.getAttribute("data-producto-id"); // Obtener ID desde el HTML
-        if (!productoId) return; // Si no hay ID, no hace nada
-
-        console.log(`🔍 Realizando la petición para el producto con ID: ${productoId}`);
-
-        // Hacer la petición al servidor para obtener el descuento del producto
-        fetch(`./model/mBuscDesc.php?id=${productoId}`)
-            .then(response => response.text()) // Obtener la respuesta en texto plano
-            .then(descuento => {
-                console.log(`🔍 Respuesta del servidor para el producto ${productoId}:`, descuento);
-
-                if (descuento.includes("PRODUCTO_NO_ENCONTRADO") || descuento.includes("ERROR_CONEXION") || descuento.includes("ID_NOT_PROVIDED")) {
-                    console.error(`❌ Descuento no encontrado para producto ${productoId}`);
-                    // Mostrar mensaje por defecto si no se encuentra el descuento
-                    producto.textContent = "Descuento no disponible";
-                } else {
-                    console.log(`🛍️ Asignando descuento al producto ${productoId}:`, descuento);
-                    // Seleccionar el elemento de descuento correspondiente y actualizar su contenido
-                    const descuentoProducto = document.querySelector(`span.product-discount[data-producto-id="${productoId}"]`);
-                    if (descuentoProducto) {
-                        descuentoProducto.textContent = `Descuento: ${descuento}%`; // Asignar el descuento al span correspondiente
-                    } else {
-                        console.error(`❌ No se encontró el span correspondiente para el producto ${productoId}`);
-                    }
-                }
-            })
-            .catch(error => {
-                console.error(`❌ Error en la petición para el producto ${productoId}:`, error);
-            });
-    });
-}
-
-// Ejecutar la función al cargar el DOM
-document.addEventListener("DOMContentLoaded", cargarDescuentoProducto);
-
-
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 document.addEventListener("DOMContentLoaded", function() {

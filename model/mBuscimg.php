@@ -18,31 +18,30 @@ if (!$conn) {
 
 // Verificar si se recibió un ID
 if (isset($_GET["id"])) {
-    $RecogeOpcion = intval($_GET["id"]); // Convertir a número
+    $RecogeOpcion = intval($_GET["id"]); // Convertir a número entero
 
-    // Consulta para obtener la URL de la imagen
+    // Consulta para obtener el nombre del archivo de imagen
     $sql = "SELECT imagen_url FROM Producto WHERE producto_id = $RecogeOpcion";
     $result = mysqli_query($conn, $sql);
 
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        $relativePath = trim($row["imagen_url"]); // Ruta en BD (Ej: "./img/1mani.jpg")
+        $nombreArchivo = trim($row["imagen_url"]); // Ej: "pescado1.jpg"
+
+        // Ruta base accesible desde navegador
+        $rutaImagen = " " . $nombreArchivo;
 
         ob_end_clean();
-        echo $relativePath; // Devolver URL completa
+        echo $rutaImagen; // Ej: ./model/img/pescado1.jpg
         exit;
     } else {
         ob_end_clean();
-        echo "IMG_NOT_FOUND";
+        echo "IMG_NOT_FOUND"; // No se encontró el producto o imagen vacía
         exit;
     }
 } else {
     ob_end_clean();
-    echo "ID_NOT_PROVIDED";
+    echo "ID_NOT_PROVIDED"; // No se proporcionó el parámetro "id"
     exit;
 }
 ?>
-
-
-
-

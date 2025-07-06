@@ -27,13 +27,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
         if (in_array($fileExtension, $allowedfileExtensions)) {
-            // Ruta física del servidor donde se guardará la imagen
-            $uploadFileDir = __DIR__ . '/../model/img/';
-            $webPath = 'model/img/';
+            // **CAMBIO CRÍTICO AQUÍ:**
+            // Ruta física ABSOLUTA en el servidor donde se guardará la imagen.
+            // '__DIR__' es el directorio de mIngresar.php (que está en 'model/').
+            // '../' sube un nivel (a la raíz de 'tu_proyecto/').
+            // '/public/img/' entra a la nueva carpeta pública de imágenes.
+            $uploadFileDir = __DIR__ . '/../public/img/';
+
+            // **CAMBIO CRÍTICO AQUÍ:**
+            // Ruta URL RELATIVA que el navegador usará para acceder a la imagen.
+            // Esta es la URL que se guardará en tu base de datos y se enviará al JavaScript.
+            $webPath = 'public/img/';
 
             // Crear carpeta si no existe
             if (!is_dir($uploadFileDir)) {
-                mkdir($uploadFileDir, 0777, true);
+                // Asegúrate de que PHP tenga permisos para crear esta carpeta.
+                // El 'true' en mkdir permite la creación recursiva de directorios.
+                if (!mkdir($uploadFileDir, 0777, true)) { 
+                    header("Location: ../view/viewIngreso.php?status=error&message=Error al crear la carpeta de imágenes.");
+                    exit;
+                }
             }
 
             $finalFileName = basename($fileName);
@@ -46,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                $imagen_url = $webPath . $finalFileName;
+                $imagen_url = $webPath . $finalFileName; // ¡Aquí se guarda la URL pública!
             } else {
                 header("Location: ../view/viewIngreso.php?status=error&message=Error al guardar imagen.");
                 exit;
@@ -58,6 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insertar en la base de datos
+    // La $imagen_url ahora contendrá la ruta pública (ej: '/public/img/nombre.jpg')
     $query = "INSERT INTO producto (nombre, descripcion, precio, stock, imagen_url, categoria_id, unidad_compra_id, unidad_venta_id) 
               VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     
