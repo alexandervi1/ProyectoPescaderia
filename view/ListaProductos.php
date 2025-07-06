@@ -22,7 +22,7 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
             </div>
             <input type="text" id="buscador" class="form-control w-25 d-block" placeholder="Buscar producto...">
             <h1 class="title">Administrador: <?php echo htmlspecialchars($nombreAdministrador); ?></h1>
-           
+            
         </div>
     </header>
 
@@ -38,14 +38,15 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
             <table class="table table-bordered text-center" id="tablaProductos">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th>ID</th>
                         <th>Nombre</th>
-                        <th>Descuento</th>
                         <th>Categoría</th>
                         <th>Descripción</th>
-                        <th>Imagen</th>
+                        <th>Imagen URL</th>
                         <th>Precio</th>
                         <th>Stock</th>
+                        <th>Unidad de Compra</th>
+                        <th>Unidad de Venta</th>
                         <th>Edición</th>
                         <th>Eliminación</th>
                     </tr>
@@ -68,7 +69,7 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
     <footer class="footer mt-5">
         <div class="container text-center">
             <p>Contacto: 09924700553-0982744920</p>
-            <p>Dirección: Av. Canonigo Ramos y Av.11 de Noviembre y  - Riobamba</p>
+            <p>Dirección: Av. Canonigo Ramos y Av.11 de Noviembre y   - Riobamba</p>
             <div class="footer-icons">
             <a target="_blank" href="https://www.facebook.com/profile.php?id=100066757715498" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
                 <a target="_blank" href="https://www.tiktok.com/@confiteriamarianita?_t=ZM-8ttYZp03fba&_r=1" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>

@@ -56,18 +56,18 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
                             <input type="text" name="descripcionProducto" id="descripcionProducto" class="form-control bg-white text-purple" required>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="precioProducto">Precio</label>
+                            <label for="precioProducto">Precio de Venta</label>
                             <input type="number" name="precioProducto" id="precioProducto" class="form-control bg-white text-purple" min="0" step="0.01" required>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="cantidadProducto">Cantidad (Stock)</label>
+                            <label for="cantidadProducto">Cantidad del producto a Ingresar (Stock)</label>
                             <input type="number" name="cantidadProducto" id="cantidadProducto" class="form-control bg-white text-purple" min="0" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="unidadCompraProducto">Unidad de Compra</label>
                             <select name="unidadCompraProducto" id="unidadCompraProducto" class="form-control bg-white text-purple" required>
                                 <option value="">Seleccione unidad de compra</option>
-                                <option value="1">Kilogramos</option>
+                                <option value="1">Toneladas</option>
                                 <option value="2">Libras</option>
                                 <option value="3">Unidades</option>
                                 <!-- Aquí deberías cargar las unidades de medida dinámicamente desde la base de datos -->

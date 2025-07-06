@@ -6,77 +6,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $descripcion = $_POST['descripcionProducto'];
     $precio = $_POST['precioProducto'];
     $stock = $_POST['cantidadProducto'];
-    // La columna 'descuento' no existe en la tabla 'producto', por lo tanto, se ha eliminado.
     $categoria_id = $_POST['categoriaProducto'];
-    $unidad_compra_id = $_POST['unidadCompraProducto']; // Asumiendo que viene del formulario
-    $unidad_venta_id = $_POST['unidadVentaProducto'];   // Asumiendo que viene del formulario
+    $unidad_compra_id = $_POST['unidadCompraProducto'];
+    $unidad_venta_id = $_POST['unidadVentaProducto'];
 
-    // Validaciones del lado del servidor
-    // Se ha eliminado la validación de descuento ya que la columna no existe.
+    // Validación simple
     if ($precio < 0 || $stock < 0) {
-        header("Location: ../view/viewIngreso.php?status=error&message=Valores negativos no permitidos para precio o stock.");
+        header("Location: ../view/viewIngreso.php?status=error&message=Valores negativos no permitidos.");
         exit;
     }
 
-    // Manejo de la subida de la imagen
-    $imagen_url = NULL; // Inicializar a NULL por si no se sube imagen
+    // Manejo de imagen
+    $imagen_url = NULL;
     if (isset($_FILES['imagenProducto']) && $_FILES['imagenProducto']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['imagenProducto']['tmp_name'];
-        $fileName = $_FILES['imagenProducto']['name'];
-        $fileNameCmps = explode(".", $fileName);
-        $fileExtension = strtolower(end($fileNameCmps));
+        $fileName = $_FILES['imagenProducto']['name']; // Este es el nombre original del archivo
+        $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-        // Permitir solo ciertas extensiones de archivo
-        $allowedfileExtensions = array('jpg', 'gif', 'png', 'jpeg');
+        $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif'];
         if (in_array($fileExtension, $allowedfileExtensions)) {
-            // Directorio donde se guardará el archivo subido
-            $uploadFileDir = './img/';
-            $dest_path = $uploadFileDir . $fileName;
-
-            // Verificar si el directorio existe, si no, crearlo
+            // Guardar imagen en carpeta accesible desde navegador
+            $uploadFileDir = '../../img/'; // Subimos desde /model a raíz
             if (!is_dir($uploadFileDir)) {
                 mkdir($uploadFileDir, 0777, true);
             }
 
+            // CAMBIO AQUÍ: Usamos el nombre original del archivo para la ruta de destino.
+            // Es crucial considerar que esto puede causar colisiones de nombres si dos usuarios suben archivos con el mismo nombre.
+            // Una estrategia común es prefijar el nombre del archivo original con un timestamp o un identificador único.
+            // Para tu solicitud actual de usar el nombre original directamente:
+            $finalFileName = $fileName; // Usamos el nombre original del archivo
+            $dest_path = $uploadFileDir . $finalFileName;
+
+            // Opcional, pero recomendado para evitar sobrescribir si el archivo ya existe:
+            // Si el nombre del archivo ya existe, puedes modificarlo (ej: añadir un sufijo _1, _2, etc.)
+            // while (file_exists($dest_path)) {
+            //     $finalFileName = pathinfo($fileName, PATHINFO_FILENAME) . '_' . uniqid() . '.' . $fileExtension;
+            //     $dest_path = $uploadFileDir . $finalFileName;
+            // }
+
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                $imagen_url = $dest_path;
+                $imagen_url = 'img/' . $finalFileName; // Solo se guarda ruta accesible
             } else {
-                header("Location: ../view/viewIngreso.php?status=error&message=Hubo un error al mover el archivo subido.");
+                header("Location: ../view/viewIngreso.php?status=error&message=Error al guardar imagen.");
                 exit;
             }
         } else {
-            header("Location: ../view/viewIngreso.php?status=error&message=Tipo de archivo no permitido.");
+            header("Location: ../view/viewIngreso.php?status=error&message=Extensión de imagen no permitida.");
             exit;
         }
-    } else {
-        // Si no se sube una imagen o hay un error, se puede dejar imagen_url como NULL (si la columna lo permite)
-        // o manejarlo según tu lógica de negocio.
-        // header("Location: ../view/viewIngreso.php?status=error&message=Hubo un error en la subida del archivo o no se seleccionó ninguno.");
-        // exit; // Descomentar si la imagen es obligatoria
     }
 
-    // Inserción de datos en la base de datos
-    // Se han añadido unidad_compra_id y unidad_venta_id, y se ha eliminado descuento.
-    $query = "INSERT INTO producto (nombre, descripcion, precio, stock, imagen_url, categoria_id, unidad_compra_id, unidad_venta_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    // s: nombre (string)
-    // s: descripcion (string)
-    // d: precio (decimal)
-    // d: stock (decimal)
-    // s: imagen_url (string)
-    // i: categoria_id (integer)
-    // i: unidad_compra_id (integer)
-    // i: unidad_venta_id (integer)
+    // Insertar en la base de datos
+    $query = "INSERT INTO producto (nombre, descripcion, precio, stock, imagen_url, categoria_id, unidad_compra_id, unidad_venta_id) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssddisii", $nombre, $descripcion, $precio, $stock, $imagen_url, $categoria_id, $unidad_compra_id, $unidad_venta_id);
+    $stmt->bind_param("ssddsiii", $nombre, $descripcion, $precio, $stock, $imagen_url, $categoria_id, $unidad_compra_id, $unidad_venta_id);
 
     if ($stmt->execute()) {
-        header("Location: ../view/viewIngreso.php?status=success&message=Producto ingresado exitosamente.");
+        header("Location: ../view/viewIngreso.php?status=success&message=Producto ingresado correctamente.");
     } else {
-        // Se añade $stmt->error para depuración
-        header("Location: ../view/viewIngreso.php?status=error&message=Hubo un error al ingresar el producto en la base de datos: " . $stmt->error);
+        header("Location: ../view/viewIngreso.php?status=error&message=Error al ingresar producto: " . $stmt->error);
     }
 
-    // Cerrar la conexión
     $stmt->close();
     $conn->close();
 }
