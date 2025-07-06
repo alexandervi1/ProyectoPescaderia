@@ -1,7 +1,7 @@
-<!-- producto.php -->
 <?php
 require_once '../config/confConexion.php';
 require_once '../model/mObtDatosProducto.php';
+
 // Obtener el ID del producto desde la URL
 if (!isset($_GET['id'])) {
     die('Error: ID de producto no especificado.');
@@ -20,15 +20,10 @@ if (!$producto) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Descripción del producto</title>
-    <!-- Bootstrap ICONS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link href="/public/css/style.css" rel="stylesheet">
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../public/css/style.css">
     <link rel="stylesheet" href="../public/css/producto.css">
@@ -61,21 +56,17 @@ if (!$producto) {
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <!-- Imagen como logo -->
             <a class="navbar-brand" href="../index.html">
                 <img src="../public/img/Pescaderia Don Walter logo.png" alt="Logo Pescaderia Don Walter" width="200" height="64">
             </a>
           
-            <!-- Opciones antes de iniciar sesión -->
             <div id="guest-options">
                 <a href="../controller/usercontrolador.php?accion=quienes_somos" id="btn-quienes" class="btn btn-link text-light" style="color: white;">¿Quiénes somos?</a>
                 <button class="btn btn-danger" id="open-login-modal">Iniciar Sesión</button>
                 <a href="#" class="btn btn-primary" id="open-register-modal">Registrarse</a>
             </div>
-            <!-- Opciones después de iniciar sesión -->
             <div id="user-options">
                 <i class="bi bi-person-circle" style="color: white; font-size: 1.5rem;"></i>
                 <span id="user-name" class="user-info" style="color: white;"></span>
@@ -86,7 +77,6 @@ if (!$producto) {
             </div>
         </div>
     </nav>
-    <!-- Botón de regreso -->
     <div class="container mt-3">
         <a href="javascript:history.back()" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left"></i> Volver
@@ -94,29 +84,20 @@ if (!$producto) {
     </div>
     <div class="container mt-5">
         <div class="row">
-            <!-- Columna de miniaturas -->
             <div class="col-md-4">
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action" onclick="cambiarImagen('../<?php echo $producto['imagen_url']; ?>')">
-                        <img src="../<?php echo $producto['imagen_url']; ?>" alt="Miniatura" class="img-fluid">
+                    <a href="#" class="list-group-item list-group-item-action" onclick="cambiarImagen('../model/<?php echo $producto['imagen_url']; ?>')">
+                        <img src="../model/img/<?php echo $producto['imagen_url']; ?>" alt="Miniatura" class="img-fluid">
                     </a>
                 </div>
             </div>
-            <!-- Columna de imagen ampliada -->
             <div class="col-md-4">
-                <img id="imagenAmpliada" src="../<?php echo $producto['imagen_url']; ?>" alt="Imagen Ampliada" class="img-fluid">
+                <img id="imagenAmpliada" src="../model/img<?php echo $producto['imagen_url']; ?>" alt="Imagen Ampliada" class="img-fluid">
             </div>
-            <!-- Columna de descripción -->
             <div class="col-md-4">
                 <h2 class="font-weight-bold"><?php echo $producto['nombre']; ?></h2>
-                <?php if ($producto['descuento'] > 0): ?>
-                    <del><?php echo $producto['precio']; ?></del>
-                    <span class="text-danger"><?php echo $producto['precio'] - ($producto['precio'] * $producto['descuento'] / 100); ?></span>
-                <?php else: ?>
-                    <span><?php echo $producto['precio']; ?></span>
-                <?php endif; ?>
+                <span>$<?php echo number_format($producto['precio'], 2); ?></span>
                 <p><?php echo $producto['descripcion']; ?></p>
-                <!-- Contenedor para centrar el grupo de cantidad -->
                 <div class="d-flex justify-content-center mb-3">
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -128,7 +109,6 @@ if (!$producto) {
                         </div>
                     </div>
                 </div>
-                <!-- Botón "Agregar al Carrito" centrado -->
                 <div class="d-flex justify-content-center">
                     <button class="btn btn-primary" onclick="agregarAlCarrito(<?php echo $producto_id; ?>, document.getElementById('cantidad').value)">
                         Agregar al Carrito
@@ -140,7 +120,7 @@ if (!$producto) {
     <footer class="footer mt-5">
         <div class="container text-center">
             <p>Contacto: 09924700553-0982744920</p>
-            <p>Dirección: Av. Canonigo Ramos y Av.11 de Noviembre y  - Riobamba</p>
+            <p>Dirección: Av. Canonigo Ramos y Av.11 de Noviembre y - Riobamba</p>
             <div class="footer-icons">
             <a target="_blank" href="https://www.facebook.com/profile.php?id=100066757715498" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
                 <a target="_blank" href="https://www.tiktok.com/@confiteriamarianita?_t=ZM-8ttYZp03fba&_r=1" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
@@ -149,7 +129,6 @@ if (!$producto) {
             </div>
         </div>
     </footer>
-    <!-- Modal de retroalimentación -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span id="modal-mensaje"></span>

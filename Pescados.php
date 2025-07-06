@@ -1,3 +1,8 @@
+<?php
+session_start();
+$usuarioLogueado = isset($_SESSION['usuario']);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -43,19 +48,21 @@
             </div>
 
             
-            <!-- Opciones después de iniciar sesión -->
+           <!-- Opciones después de iniciar sesión -->
             <div id="user-options">
-                <a href="#" style="color: white;">
+                <a href="#" class="d-flex align-items-center text-decoration-none" style="color: white;">
                     <i class="bi bi-person-circle" style="font-size: 1.5rem; margin-right: 5px;"></i>
                     <span id="user-name" class="user-info"></span>
                 </a>
-                <a href="#" aria-label="Carrito de compras"><i class="bi bi-cart"></i></a>
+                <a href="view/carrito.php" aria-label="Carrito de compras"><i class="bi bi-cart"></i></a>
                 <!--<i class="bi bi-cart3" style="font-size: 1.5rem;"></i>-->
                 <!--<a href="controller/logout.php" class="bi bi-box-arrow-right">Cerrar Sesión</a>-->
                 <a href="controller/logout.php" aria-label="Cerrar sesión" style="color: white;">
                     <i class="bi bi-power" style="font-size: 2.0rem;"></i>
                 </a>
             </div>
+        </div>
+    </nav>
             <!--<div class="collapse navbar-collapse" id="navbarContent">
 
                 <div>

@@ -18,35 +18,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Manejo de imagen
     $imagen_url = NULL;
+
     if (isset($_FILES['imagenProducto']) && $_FILES['imagenProducto']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['imagenProducto']['tmp_name'];
-        $fileName = $_FILES['imagenProducto']['name']; // Este es el nombre original del archivo
+        $fileName = $_FILES['imagenProducto']['name'];
         $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
         $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
         if (in_array($fileExtension, $allowedfileExtensions)) {
-            // Guardar imagen en carpeta accesible desde navegador
-            $uploadFileDir = '../../img/'; // Subimos desde /model a raíz
+            // Ruta física del servidor donde se guardará la imagen
+            $uploadFileDir = __DIR__ . '/../model/img/';
+            $webPath = 'model/img/';
+
+            // Crear carpeta si no existe
             if (!is_dir($uploadFileDir)) {
                 mkdir($uploadFileDir, 0777, true);
             }
 
-            // CAMBIO AQUÍ: Usamos el nombre original del archivo para la ruta de destino.
-            // Es crucial considerar que esto puede causar colisiones de nombres si dos usuarios suben archivos con el mismo nombre.
-            // Una estrategia común es prefijar el nombre del archivo original con un timestamp o un identificador único.
-            // Para tu solicitud actual de usar el nombre original directamente:
-            $finalFileName = $fileName; // Usamos el nombre original del archivo
+            $finalFileName = basename($fileName);
             $dest_path = $uploadFileDir . $finalFileName;
 
-            // Opcional, pero recomendado para evitar sobrescribir si el archivo ya existe:
-            // Si el nombre del archivo ya existe, puedes modificarlo (ej: añadir un sufijo _1, _2, etc.)
-            // while (file_exists($dest_path)) {
-            //     $finalFileName = pathinfo($fileName, PATHINFO_FILENAME) . '_' . uniqid() . '.' . $fileExtension;
-            //     $dest_path = $uploadFileDir . $finalFileName;
-            // }
+            // Verifica si ya existe un archivo con el mismo nombre
+            if (file_exists($dest_path)) {
+                header("Location: ../view/viewIngreso.php?status=error&message=Ya existe una imagen con ese nombre.");
+                exit;
+            }
 
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                $imagen_url = 'img/' . $finalFileName; // Solo se guarda ruta accesible
+                $imagen_url = $webPath . $finalFileName;
             } else {
                 header("Location: ../view/viewIngreso.php?status=error&message=Error al guardar imagen.");
                 exit;

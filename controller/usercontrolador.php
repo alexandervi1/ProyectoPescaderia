@@ -20,13 +20,18 @@ switch ($accion) {
         echo json_encode(["modal" => "login"]); 
         exit;
 
-    case "registro":
+    /*case "registro":
         echo json_encode(["modal" => "registro"]); 
-        exit;
+        exit;*/
+    
+    case "registro":
+        header("Location:../view/viewRegistroCliente.php");
     exit;
+    
     case "volver":
         header("Location: ../index.html");
         break;
+    
     default:
         header("Location: ../index.html");
         break;

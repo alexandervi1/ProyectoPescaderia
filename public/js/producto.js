@@ -8,67 +8,19 @@ function cambiarImagen(url) {
     }
 }
 
-function cambiarCantidad(valor) {
-    let cantidad = parseInt(document.getElementById('cantidad').value);
-    cantidad += valor;
-    if (cantidad < 1) cantidad = 1;
-    document.getElementById('cantidad').value = cantidad;
-}
-
-function agregarAlCarrito(producto_id, cantidad) {
-    console.log('Producto ID:', producto_id, 'Cantidad:', cantidad);
-    fetch('../../controller/carritoController.php', { // Ajusta la ruta aquí
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'accion=agregar&producto_id=' + producto_id + '&cantidad=' + cantidad
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.status == 'success') {
-                mostrarModal('Producto agregado al carrito');
-            } else {
-                mostrarModal('Error al agregar al carrito: ' + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            mostrarModal('Error al agregar al carrito');
-        });
-}
-
-function mostrarModal(mensaje) {
-    const modal = document.getElementById('modal');
-    const modalMensaje = document.getElementById('modal-mensaje');
-    modalMensaje.textContent = mensaje;
-    modal.style.display = 'block';
-    setTimeout(() => {
-        modal.style.opacity = '1';
-    }, 10);
-    setTimeout(() => {
-        modal.style.opacity = '0';
-        setTimeout(() => {
-            modal.style.display = 'none';
-        }, 500);
-    }, 2000); // 2 segundos de visibilidad
-}
+// REMOVIDO: La función cambiarCantidad se mueve a carrito.js
+// REMOVIDO: La función agregarAlCarrito se mueve a carrito.js
+// REMOVIDO: La función mostrarModal se mueve a carrito.js (o se considera un archivo utilitario)
+// REMOVIDO: El window.onclick para cerrar el modal se mueve a carrito.js
 
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("JavaScript cargado correctamente."); // ✅ Verifica que el script se ejecuta correctamente
+    console.log("JavaScript cargado correctamente.");
 
-    // elementos para conectar con el logueo
     let loginForm = document.getElementById("login-form");
     let registerForm = document.getElementById("register-form");
     let userOptions = document.getElementById("user-options");
     let guestOptions = document.getElementById("guest-options");
     let logoutBtn = document.getElementById("logout-btn");
-    // Elementos del DOM para ventanas modales
     let btnQuienes = document.getElementById("btn-quienes");
     let btnLogin = document.getElementById("open-login-modal");
     let btnRegister = document.getElementById("open-register-modal");
@@ -78,32 +30,38 @@ document.addEventListener("DOMContentLoaded", function() {
     let closeRegisterModal = document.getElementById("close-register-modal");
     let registerLink = document.getElementById("show-register");
 
-    // ✅ Comprobar sesión al cargar la página
+    // Comprobar sesión al cargar la página
     fetch("../controller/getSession.php")
         .then(response => response.json())
         .then(data => {
-            console.log("Sesión detectada:", data); // 🔍 Debugging en consola
+            console.log("Sesión detectada:", data);
             if (data.rol_id !== 3 && data.nombre_usuario !== "visitante") {
-                // Si el usuario ha iniciado sesión
-                if (data.rol_id === 1) {
-                    guestOptions.style.display = "flex"; // Mostrar botones "Iniciar sesión" y "Registrarse"
-                    userOptions.style.display = "none"; // Ocultar datos de usuario
-                } else {
-                    // Si es CLIENTE, mostrar su información
+                if (data.rol_id === 1) { // Lógica para Administrador - ¡Revisa esto!
+                    // Si es ADMINISTRADOR, puedes redirigirlo o mostrar opciones de admin
+                    // Por ahora, tu código muestra opciones de invitado, lo cual es inusual.
+                    // Quizás quieras redirigir a un panel de admin.
+                    // guestOptions.style.display = "flex";
+                    // userOptions.style.display = "none";
+                    console.log("Usuario Administrador detectado. Considerar redirigir o mostrar panel.");
+                    // Ejemplo de redirección: window.location.href = "Administrador.php";
+                    guestOptions.style.display = "none"; // Ocultar opciones de invitado
+                    userOptions.style.display = "flex"; // Mostrar opciones de usuario para que vea su nombre/cerrar sesión
+                    document.getElementById("user-name").textContent = `: ${data.nombre_usuario} (Admin)`;
+
+                } else if (data.rol_id === 2) { // Si es CLIENTE
                     guestOptions.style.display = "none";
                     userOptions.style.display = "flex";
-                    document.getElementById("user-name").textContent = `: ${data.nombre_usuario}`; // Mostrar el nombre
+                    document.getElementById("user-name").textContent = `: ${data.nombre_usuario}`;
                 }
-            } else {
-                // Usuario visitante
+            } else { // Usuario visitante
                 guestOptions.style.display = "flex";
                 userOptions.style.display = "none";
-                document.getElementById("user-name").textContent = ""; // Limpiar el nombre
+                document.getElementById("user-name").textContent = "";
             }
         })
         .catch(error => console.error("Error al obtener sesión:", error));
 
-    // ✅ Manejo del login adaptado para clientes y administradores
+    // Manejo del login adaptado para clientes y administradores
     if (loginForm) {
         loginForm.addEventListener("submit", function(event) {
             event.preventDefault();
@@ -158,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => console.error("Error en el login de administrador:", error));
     }
 
-    // ✅ Manejo del registro
+    // Manejo del registro
     if (registerForm) {
         registerForm.addEventListener("submit", function(event) {
             event.preventDefault();
@@ -183,14 +141,14 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // ✅ Acción para "¿Quiénes Somos?"
+    // Acción para "¿Quiénes Somos?"
     if (btnQuienes) {
         btnQuienes.addEventListener("click", function() {
             window.location.href = "../controller/usercontrolador.php?accion=quienes_somos";
         });
     }
 
-    // ✅ Acción para "Iniciar Sesión"
+    // Acción para "Iniciar Sesión"
     if (btnLogin) {
         btnLogin.addEventListener("click", function() {
             fetch("../controller/usercontrolador.php?accion=login")
@@ -207,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // ✅ Acción para cerrar el modal de login
+    // Acción para cerrar el modal de login
     if (closeLoginModal) {
         closeLoginModal.addEventListener("click", function() {
             loginModal.style.opacity = "0";
@@ -215,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // ✅ Cerrar modal de registro con la X
+    // Cerrar modal de registro con la X
     if (closeRegisterModal) {
         closeRegisterModal.addEventListener("click", function() {
             registerModal.style.opacity = "0";
@@ -223,19 +181,21 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // ✅ Cerrar el modal si se hace clic fuera del contenido
-    window.addEventListener("click", function(event) {
-        if (event.target === loginModal) {
-            loginModal.style.opacity = "0";
-            loginModal.style.visibility = "hidden";
-        }
-        if (event.target === registerModal) {
-            registerModal.style.opacity = "0";
-            registerModal.style.visibility = "hidden";
-        }
-    });
+    // Cerrar el modal si se hace clic fuera del contenido
+    // REVISAR: Si tienes un modal de producto y otros, esta lógica puede interferir.
+    // window.addEventListener("click", function(event) {
+    //     if (event.target === loginModal) {
+    //         loginModal.style.opacity = "0";
+    //         loginModal.style.visibility = "hidden";
+    //     }
+    //     if (event.target === registerModal) {
+    //         registerModal.style.opacity = "0";
+    //         registerModal.style.visibility = "hidden";
+    //     }
+    // });
+    // **Nota:** El `window.onclick` para cerrar modales de login/registro ya no necesita estar aquí si lo manejarás individualmente o con una lógica más específica. Si tu modal de "producto agregado" también se cierra así, asegúrate de que no haya conflicto.
 
-    // ✅ Acción para "Registrarse"
+    // Acción para "Registrarse"
     if (btnRegister) {
         btnRegister.addEventListener("click", function() {
             fetch("../controller/usercontrolador.php?accion=registro")
@@ -249,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // ✅ Pasar del login al registro
+    // Pasar del login al registro
     if (registerLink) {
         registerLink.addEventListener("click", function(event) {
             event.preventDefault();
@@ -262,12 +222,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // ✅ Cerrar sesión
+    // Cerrar sesión
     if (logoutBtn) {
         logoutBtn.addEventListener("click", function() {
-            fetch("controller/logout.php")
+            // RUTA CORREGIDA: Desde public/js/ a controller/logout.php
+            fetch("../controller/logout.php")
                 .then(() => {
-                    window.location.href = "index.html";
+                    window.location.href = "../index.html"; // Redirigir a la página principal
                 })
                 .catch(error => console.error("Error al cerrar sesión:", error));
         });
