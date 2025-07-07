@@ -7,7 +7,7 @@
     }else if($RecOpcion==2){
         include("../view/ListarClientes.php");
     }else if($RecOpcion==3){
-        include("../view/viewRegistroVentas.php");
+        include("../reportes/Reportes.php");
     }else if($RecOpcion==4){
         include("../view/viewAdquisiciones.php");
     }else if($RecOpcion==5){
