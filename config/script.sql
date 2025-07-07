@@ -88,7 +88,23 @@ CREATE TABLE producto (
 );
 
 -- ================================================
--- 6. TABLA: pedido
+-- ** 6. NUEVA TABLA: carrito **
+-- Esta tabla almacenará los productos temporales en el carrito de cada usuario.
+-- ================================================
+CREATE TABLE carrito (
+  carrito_id INT(11) NOT NULL AUTO_INCREMENT,
+  usuario_id INT(11) NOT NULL,
+  producto_id INT(11) NOT NULL,
+  cantidad INT(11) NOT NULL DEFAULT 1, -- Cantidad de este producto en el carrito
+  fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Para saber cuándo se añadió
+  PRIMARY KEY (carrito_id),
+  UNIQUE KEY (usuario_id, producto_id), -- Un usuario no puede tener el mismo producto dos veces en el carrito
+  CONSTRAINT fk_carrito_usuario FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id) ON DELETE CASCADE,
+  CONSTRAINT fk_carrito_producto FOREIGN KEY (producto_id) REFERENCES producto(producto_id) ON DELETE CASCADE
+);
+
+-- ================================================
+-- 7. TABLA: pedido
 -- ================================================
 CREATE TABLE pedido (
   pedido_id INT(11) NOT NULL AUTO_INCREMENT,
@@ -101,7 +117,7 @@ CREATE TABLE pedido (
 );
 
 -- ================================================
--- 7. TABLA: pedidoproducto
+-- 8. TABLA: pedidoproducto
 -- ================================================
 CREATE TABLE pedidoproducto (
   pedido_id INT(11) NOT NULL,
@@ -114,7 +130,7 @@ CREATE TABLE pedidoproducto (
 );
 
 -- ================================================
--- 8. TRIGGER: Actualizar total del pedido automáticamente
+-- 9. TRIGGER: Actualizar total del pedido automáticamente
 -- ================================================
 DELIMITER $$
 
@@ -133,7 +149,7 @@ BEGIN
 END$$
 
 -- ================================================
--- 9. TRIGGER: Descontar del stock automáticamente según unidad
+-- 10. TRIGGER: Descontar del stock automáticamente según unidad
 -- ================================================
 CREATE TRIGGER trg_DescontarStock
 AFTER INSERT ON pedidoproducto

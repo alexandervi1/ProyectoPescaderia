@@ -87,7 +87,7 @@ if (!$producto) {
             <div class="col-md-4">
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action" onclick="cambiarImagen('../model/<?php echo $producto['imagen_url']; ?>')">
-                        <img src="../model/img/<?php echo $producto['imagen_url']; ?>" alt="Miniatura" class="img-fluid">
+                        <img src="../public/img/<?php echo $producto['imagen_url']; ?>" alt="Miniatura" class="img-fluid">
                     </a>
                 </div>
             </div>
