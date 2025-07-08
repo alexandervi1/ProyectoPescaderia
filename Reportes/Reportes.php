@@ -67,7 +67,7 @@ $nombreAdministrador = $_SESSION['nombre_usuario'] ?? "Administrador"; // O cual
                     <a class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height" href="../controller/reportesControlador.php?tipo=ventas"> <!-- Ruta corregida -->
                         <!-- Icono de Ventas -->
                         <img src="../public/img/icons/icoReport.png" alt="Reporte de Ventas" class="img-fluid mb-2 custom-img">
-                        Reporte de Ventas <!-- Texto del botón actualizado -->
+                        Reporte de Ventas <!-- Muestra idcliente,fechaCompra,totalCompra,totalConiva -->
                     </a>
                 </div>
                 <!-- Reporte de Productos Más Vendidos -->
@@ -75,7 +75,7 @@ $nombreAdministrador = $_SESSION['nombre_usuario'] ?? "Administrador"; // O cual
                     <a href="../controller/reportesControlador.php?tipo=mas_vendidos" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height"> <!-- Ruta corregida -->
                         <!-- Icono de Productos Más Vendidos -->
                         <img src="../public/img/icons/icoReport.png" alt="Productos Más Vendidos" class="img-fluid mb-2 custom-img">
-                        Productos Más Vendidos <!-- Texto del botón actualizado -->
+                        Productos Más Vendidos <!-- Idprducto,nombreProducto,cantidadVendida-->
                     </a>
                 </div>
                 <!-- Reporte de Stock Bajo -->
@@ -83,7 +83,7 @@ $nombreAdministrador = $_SESSION['nombre_usuario'] ?? "Administrador"; // O cual
                     <a href="../controller/reportesControlador.php?tipo=stock_bajo" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height"> <!-- Ruta corregida -->
                         <!-- Icono de Stock Bajo -->
                         <img src="../public/img/icons/icoReport.png" alt="Stock Bajo" class="img-fluid mb-2 custom-img">
-                        Reporte de Stock Bajo <!-- Texto del botón actualizado -->
+                        Reporte de facturacion <!--  -->
                     </a>
                 </div>
                 <!-- Reporte de Clientes (ej. Top Clientes) -->

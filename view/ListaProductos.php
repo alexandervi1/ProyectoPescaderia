@@ -120,6 +120,7 @@ $nombreAdministrador = $_SESSION['nombre_usuario'] ?? 'Administrador'; // Usar u
     <div class="text-center my-3">
         <a href="../model/MReporteListaProductos.php" class="btn btn-primary btn-pdf me-2">Generar Documento PDF</a>
         <a href="../view/viewIngreso.php" class="btn btn-success btn-ingreso me-2">Ingresar Nuevo Producto</a>
+        <a href="../view/viewEditarIVA.php" class="btn btn-danger">Modificar IVA</a>
         <a href="../Administrador.php" class="btn btn-warning">Regresar</a>
     </div>
 

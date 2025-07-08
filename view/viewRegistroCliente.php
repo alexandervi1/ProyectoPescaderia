@@ -85,7 +85,7 @@
 
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Registrarme</button>
-            <a href="../index.php" class="btn btn-secondary">Cancelar</a>
+            <a href="../index.html" class="btn btn-secondary">Cancelar</a>
           </div>
         </form>
       </div>

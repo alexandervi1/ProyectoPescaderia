@@ -113,6 +113,12 @@ $usuario_id = $_SESSION['usuario_id'];
             </div>
         </div>
     </nav>
+    <div class="container mt-4">
+        <a href="../index.html" class="btn btn-outline-secondary mb-3">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+    </div>
+    <!-- Contenido del carrito de compras -->
 
     <div class="container mt-5">
         <h2 class="text-center mb-4">Carrito de Compras</h2>
