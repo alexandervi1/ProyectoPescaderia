@@ -86,13 +86,13 @@ if (!$producto) {
         <div class="row">
             <div class="col-md-4">
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action" onclick="cambiarImagen('../model/<?php echo $producto['imagen_url']; ?>')">
-                        <img src="../public/img/<?php echo $producto['imagen_url']; ?>" alt="Miniatura" class="img-fluid">
+                    <a href="#" class="list-group-item list-group-item-action" onclick="cambiarImagen('../<?php echo $producto['imagen_url']; ?>')">
+                        <img src="../<?php echo $producto['imagen_url']; ?>" alt="Miniatura" class="img-fluid">
                     </a>
                 </div>
             </div>
             <div class="col-md-4">
-                <img id="imagenAmpliada" src="../model/img<?php echo $producto['imagen_url']; ?>" alt="Imagen Ampliada" class="img-fluid">
+                <img id="imagenAmpliada" src="../<?php echo $producto['imagen_url']; ?>" alt="Imagen Ampliada" class="img-fluid">
             </div>
             <div class="col-md-4">
                 <h2 class="font-weight-bold"><?php echo $producto['nombre']; ?></h2>
