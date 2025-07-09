@@ -9,7 +9,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Marianita - Juguetes</title>
+    <title>Don Walter Pescaderia</title>
     <!-- Bootstrap ICONS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -106,6 +106,90 @@ $usuarioLogueado = isset($_SESSION['usuario']);
                                 <p class="card-text" data-producto-id="2"></p>
                                 <p class="product-price" data-producto-id="2"></p>
                                 <a href="view/producto.php?id=2" class="btn btn-primary btn-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 3 -->
+                    <div class="col-md-3">
+                        <div class="card mb-4">
+                            <img class="card-img-top" alt="Producto 3" data-producto-id="5">
+                            <div class="card-body p-2">
+                                <h5 class="card-title" data-producto-id="5"></h5>
+                                <p class="card-text" data-producto-id="5"></p>
+                                <p class="product-price" data-producto-id="5"></p>
+                                <a href="view/producto.php?id=5" class="btn btn-primary btn-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 4 -->
+                     <div class="col-md-3">
+                        <div class="card mb-4">
+                            <img class="card-img-top" alt="Producto 4" data-producto-id="6">
+                            <div class="card-body p-2">
+                                <h5 class="card-title" data-producto-id="6"></h5>
+                                <p class="card-text" data-producto-id="6"></p>
+                                <p class="product-price" data-producto-id="6"></p>
+                                <a href="view/producto.php?id=6" class="btn btn-primary btn-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 5 -->
+                     <div class="col-md-3">
+                        <div class="card mb-4">
+                            <img class="card-img-top" alt="Producto 5" data-producto-id="9">
+                            <div class="card-body p-2">
+                                <h5 class="card-title" data-producto-id="9"></h5>
+                                <p class="card-text" data-producto-id="9"></p>
+                                <p class="product-price" data-producto-id="9"></p>
+                                <a href="view/producto.php?id=9" class="btn btn-primary btn-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 6 -->
+                     <div class="col-md-3">
+                        <div class="card mb-4">
+                            <img class="card-img-top" alt="Producto 6" data-producto-id="13">
+                            <div class="card-body p-2">
+                                <h5 class="card-title" data-producto-id="13"></h5>
+                                <p class="card-text" data-producto-id="13"></p>
+                                <p class="product-price" data-producto-id="13"></p>
+                                <a href="view/producto.php?id=13" class="btn btn-primary btn-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 7 -->
+                    <div class="col-md-3">
+                        <div class="card mb-4">
+                            <img class="card-img-top" alt="Producto 7" data-producto-id="14">
+                            <div class="card-body p-2">
+                                <h5 class="card-title" data-producto-id="14"></h5>
+                                <p class="card-text" data-producto-id="14"></p>
+                                <p class="product-price" data-producto-id="14"></p>
+                                <a href="view/producto.php?id=14" class="btn btn-primary btn-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Tarjeta 8 -->
+                    <div class="col-md-3">
+                        <div class="card mb-4">
+                            <img class="card-img-top" alt="Producto 8" data-producto-id="15">
+                            <div class="card-body p-2">
+                                <h5 class="card-title" data-producto-id="15"></h5>
+                                <p class="card-text" data-producto-id="15"></p>
+                                <p class="product-price" data-producto-id="15"></p>
+                                <a href="view/producto.php?id=15" class="btn btn-primary btn-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 9 -->
+                    <div class="col-md-3">
+                        <div class="card mb-4">
+                            <img class="card-img-top" alt="Producto 9" data-producto-id="16">
+                            <div class="card-body p-2">
+                                <h5 class="card-title" data-producto-id="16"></h5>
+                                <p class="card-text" data-producto-id="16"></p>
+                                <p class="product-price" data-producto-id="16"></p>
+                                <a href="view/producto.php?id=16" class="btn btn-primary btn-sm">Comprar</a>
                             </div>
                         </div>
                     </div>

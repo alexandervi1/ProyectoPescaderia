@@ -1,10 +1,15 @@
+<?php
+session_start();
+$usuarioLogueado = isset($_SESSION['usuario']);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Marianita - Juguetes</title>
+    <title>Don Walter Pescaderia</title>
     <!-- Bootstrap ICONS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -14,33 +19,6 @@
 </head>
 
 <body>
-
-    <!-- Modal de Login -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" id="close-login-modal">&times;</button>
-            <!-- Botón de cierre -->
-            <center><img src="./public/img/Pescaderia Don Walter logo.png" alt="Logo" class="logo" width="200px"></center>
-            <hr>
-            <h3>Iniciar Sesión</h3>
-            <hr>
-            <br>
-            <form id="login-form">
-                <label for="login-usuario">Nombre de Usuario:</label>
-                <input type="text" id="login-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
-
-                <label for="login-password">Contraseña:</label>
-                <input type="password" id="login-password" placeholder="Tu contraseña" required style="width: 300px;">
-
-                <button type="submit" id="login-btn">Ingresar</button>
-                <center>
-                    <p id="register-link">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
-                </center>
-            </form>
-        </div>
-    </div>
-
-   
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
@@ -60,25 +38,31 @@
             </form>
 
             <!-- Opciones antes de iniciar sesión -->
-            <div id="guest-options">
+           <div id="guest-options">
+        
                 <a href="./controller/usercontrolador.php?accion=quienes_somos" id="btn-quienes" class="btn btn-link text-light" style=" color: white;">¿Quiénes somos?</a>
                 <button class="btn btn-danger" id="open-login-modal">Iniciar Sesión</button>
                 <a href="#" class="btn btn-primary" id="open-register-modal">Registrarse</a>
+               
+                <!--<a href="#" class="btn btn-link text-light" id="open-admin-modal">Administrador</a>-->
             </div>
 
-            <!-- Opciones después de iniciar sesión -->
+            
+           <!-- Opciones después de iniciar sesión -->
             <div id="user-options">
-                <a href="#" style="color: white;">
+                <a href="#" class="d-flex align-items-center text-decoration-none" style="color: white;">
                     <i class="bi bi-person-circle" style="font-size: 1.5rem; margin-right: 5px;"></i>
                     <span id="user-name" class="user-info"></span>
                 </a>
-                <a href="#" aria-label="Carrito de compras"><i class="bi bi-cart"></i></a>
+                <a href="view/carrito.php" aria-label="Carrito de compras"><i class="bi bi-cart"></i></a>
                 <!--<i class="bi bi-cart3" style="font-size: 1.5rem;"></i>-->
                 <!--<a href="controller/logout.php" class="bi bi-box-arrow-right">Cerrar Sesión</a>-->
                 <a href="controller/logout.php" aria-label="Cerrar sesión" style="color: white;">
                     <i class="bi bi-power" style="font-size: 2.0rem;"></i>
                 </a>
             </div>
+        </div>
+    </nav>
             <!--<div class="collapse navbar-collapse" id="navbarContent">
 
                 <div>
@@ -91,167 +75,43 @@
 
 
     <!-- Main Content -->
-    <div>
-    <div class="container mt-3">
-        <a href="controller/usercontrolador.php?opcion=volver" class="btn btn-outline-secondary">
+  <div class="container mt-4">
+        <a href="index.html" class="btn btn-outline-secondary mb-3">
             <i class="bi bi-arrow-left"></i> Volver
         </a>
-    </div>
-        <div class="container mt-4">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h2 class="mb-4">Confiteria</h2>
-                </div>
-                <div class="col-12">
-                    <div class="row" id="product-list">
-                        <div class="col-md-4">
-                            <div class="card mb-4">
-                                <img class="card-img-top" alt="Producto 1" data-producto-id="2">
-                                <div class="card-body" style="padding: 0;">
-                                    <h5 class="card-title" data-producto-id="2"></h5>
-                                    <p class="card-text" data-producto-id="2"></p>
-                                    <p class="product-price" data-producto-id="2"></p>
-                                    <p class="product-discount" data-producto-id="2"></p>
-                                    <a href="view/producto.php?id=2" class="btn btn-primary">Comprar</a>
-                                </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="mb-4">Pulpos y Calamares</h2>
+            </div>
+            <div class="col-12">
+                <div class="row" id="product-list">
+                    <!-- Tarjeta 1 -->
+                    <div class="col-md-3">
+                        <div class="card mb-4">
+                            <img class="card-img-top" alt="Producto 1" data-producto-id="3">
+                            <div class="card-body p-2">
+                                <h5 class="card-title" data-producto-id="3"></h5>
+                                <p class="card-text" data-producto-id="3"></p>
+                                <p class="product-price" data-producto-id="3"></p>
+                                <a href="view/producto.php?id=3" class="btn btn-primary btn-sm">Comprar</a>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card mb-4">
-                                <img class="card-img-top" alt="Producto 2" data-producto-id="11">
-                                <div class="card-body" style="padding: 0;">
-                                    <h5 class="card-title" data-producto-id="11"></h5>
-                                    <!-- Nombre del producto -->
-                                    <p class="card-text" data-producto-id="11"></p>
-                                    <!-- Aquí se actualizará la descripción -->
-                                    <p class="product-price" data-producto-id="11"></p>
-                                    <!-- Aquí se actualizará el precio -->
-                                    <p class="product-discount" data-producto-id="11"></p>
-                                    <!-- Aquí se actualizará el descuento -->
-                                    <a href="view/producto.php?id=3" class="btn btn-primary">Comprar</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card mb-4">
-                                <img class="card-img-top" alt="Producto 3" data-producto-id="4">
-                                <div class="card-body" style="padding: 0;">
-                                    <h5 class="card-title" data-producto-id="4"></h5>
-                                    <!-- Nombre del producto -->
-                                    <p class="card-text" data-producto-id="4"></p>
-                                    <!-- Aquí se actualizará la descripción -->
-                                    <p class="product-price" data-producto-id="4"></p>
-                                    <!-- Aquí se actualizará el precio -->
-                                    <p class="product-discount" data-producto-id="4"></p>
-                                    <!-- Aquí se actualizará el descuento -->
-                                    <a href="view/producto.php?id=4" class="btn btn-primary">Comprar</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card mb-4">
-                                <img class="card-img-top" alt="Producto 4" data-producto-id="5">
-                                <div class="card-body" style="padding: 0;">
-                                    <h5 class="card-title" data-producto-id="5"></h5>
-                                    <!-- Nombre del producto -->
-                                    <p class="card-text" data-producto-id="5"></p>
-                                    <!-- Aquí se actualizará la descripción -->
-                                    <p class="product-price" data-producto-id="5"></p>
-                                    <!-- Aquí se actualizará el precio -->
-                                    <p class="product-discount" data-producto-id="5"></p>
-                                    <!-- Aquí se actualizará el descuento -->
-                                    <a href="#}view/producto.php?id=5" class="btn btn-primary">Comprar</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="card mb-4">
-                                <img class="card-img-top" alt="Producto 5" data-producto-id="6">
-                                <div class="card-body" style="padding: 0;">
-                                    <h5 class="card-title" data-producto-id="6"></h5>
-                                    <!-- Nombre del producto -->
-                                    <p class="card-text" data-producto-id="6"></p>
-                                    <!-- Aquí se actualizará la descripción -->
-                                    <p class="product-price" data-producto-id="6"></p>
-                                    <!-- Aquí se actualizará el precio -->
-                                    <p class="product-discount" data-producto-id="6"></p>
-                                    <!-- Aquí se actualizará el descuento -->
-                                    <a href="view/producto.php?id=6" class="btn btn-primary">Comprar</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card mb-4">
-                                <img class="card-img-top" alt="Producto 6" data-producto-id="7">
-                                <div class="card-body" style="padding: 0;">
-                                    <h5 class="card-title" data-producto-id="7"></h5>
-                                    <!-- Nombre del producto -->
-                                    <p class="card-text" data-producto-id="7"></p>
-                                    <!-- Aquí se actualizará la descripción -->
-                                    <p class="product-price" data-producto-id="7"></p>
-                                    <!-- Aquí se actualizará el precio -->
-                                    <p class="product-discount" data-producto-id="7"></p>
-                                    <!-- Aquí se actualizará el descuento -->
-                                    <a href="view/producto.php?id=7" class="btn btn-primary">Comprar</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="card mb-4">
-                                <img class="card-img-top" alt="Producto 7" data-producto-id="8">
-                                <div class="card-body" style="padding: 0;">
-                                    <h5 class="card-title" data-producto-id="8"></h5>
-                                    <!-- Nombre del producto -->
-                                    <p class="card-text" data-producto-id="8"></p>
-                                    <!-- Aquí se actualizará la descripción -->
-                                    <p class="product-price" data-producto-id="8"></p>
-                                    <!-- Aquí se actualizará el precio -->
-                                    <p class="product-discount" data-producto-id="8"></p>
-                                    <!-- Aquí se actualizará el descuento -->
-                                    <a href="view/producto.php?id=8" class="btn btn-primary">Comprar</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="card mb-4">
-                                <img class="card-img-top" alt="Producto 8" data-producto-id="9">
-                                <div class="card-body" style="padding: 0;">
-                                    <h5 class="card-title" data-producto-id="9"></h5>
-                                    <!-- Nombre del producto -->
-                                    <p class="card-text" data-producto-id="9"></p>
-                                    <!-- Aquí se actualizará la descripción -->
-                                    <p class="product-price" data-producto-id="9"></p>
-                                    <!-- Aquí se actualizará el precio -->
-                                    <p class="product-discount" data-producto-id="9"></p>
-                                    <!-- Aquí se actualizará el descuento -->
-                                    <a href="view/producto.php?id=9" class="btn btn-primary">Comprar</a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-4">
-                            <div class="card mb-4">
-                                <img class="card-img-top" alt="Producto 9" data-producto-id="10">
-                                <div class="card-body" style="padding: 0;">
-                                    <h5 class="card-title" data-producto-id="10"></h5>
-                                    <!-- Nombre del producto -->
-                                    <p class="card-text" data-producto-id="10"></p>
-                                    <!-- Aquí se actualizará la descripción -->
-                                    <p class="product-price" data-producto-id="10"></p>
-                                    <!-- Aquí se actualizará el precio -->
-                                    <p class="product-discount" data-producto-id="10"></p>
-                                    <!-- Aquí se actualizará el descuento -->
-                                    <a href="view/producto.php?id=10" class="btn btn-primary">Comprar</a>
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
+                    <!-- Tarjeta 2 -->
+                    <div class="col-md-3">
+                        <div class="card mb-4">
+                            <img class="card-img-top" alt="Producto 2" data-producto-id="7">
+                            <div class="card-body p-2">
+                                <h5 class="card-title" data-producto-id="7"></h5>
+                                <p class="card-text" data-producto-id="7"></p>
+                                <p class="product-price" data-producto-id="7"></p>
+                                <a href="view/producto.php?id=7" class="btn btn-primary btn-sm">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                     
+                    <!-- Agrega más tarjetas según sea necesario -->
                 </div>
             </div>
         </div>
@@ -274,16 +134,45 @@
 
     <script src="../public/js/index.js"></script>
     <script src="../public/js/app copy.js"></script>
+    <script src="/public/js/app.js"></script>
 </body>
 
 </html>
 
- <!-- Modal de Registro -->
+<!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-login-modal" style="font-weight: bold;">&times;</button>
+            <!-- Botón de cierre -->
+            <center><img src="./public/img/Pescaderia Don Walter logo.png" alt="Logo" class="logo" width="200px"></center>
+            <hr>
+            <h3>Iniciar Sesión</h3>
+            <hr>
+            <br>
+            <form id="login-form">
+                <label for="login-usuario">Nombre de Usuario:</label>
+                <input type="text" id="login-usuario" placeholder="Tu nombre de usuario" required style="width: 300px;">
+
+                <label for="login-password">Contraseña:</label>
+                <input type="password" id="login-password" placeholder="Tu contraseña" required style="width: 300px;">
+
+                <button class= "btn_loguin" type="submit" id="login-btn">Ingresar</button>
+                <center>
+                    <p id="register-link">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
+                </center>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
     <div id="register-modal" class="modal">
         <div class="modal-content">
-            <button class="close-modal" id="close-register-modal">&times;</button>
+            <button class="close-modal" id="close-register-modal" style="font-weight: bold;">&times;</button>
+            <!-- Botón de cierre -->
+            <center><img src="./public/img/Pescaderia Don Walter logo.png" alt="Logo" class="logo" width="200px"></center>
             <hr>
-            <h3>Registro</h3>
+
+            <h3>Registro de Clientes</h3>
             <hr>
             <br>
             <form id="register-form">

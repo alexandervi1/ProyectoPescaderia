@@ -48,9 +48,9 @@ CREATE TABLE unidad_medida (
 );
 
 INSERT INTO unidad_medida (nombre, abreviatura) VALUES
-('Tonelada', 'Tn'),
-('Libra', 'lb'),
-('Unidad', 'u');
+('Tonelada', 'Tn'), -- ID 1
+('Libra', 'lb'),     -- ID 2
+('Unidad', 'u');     -- ID 3
 
 -- ================================================
 -- 4. TABLA: categoria
@@ -86,30 +86,73 @@ CREATE TABLE producto (
   CONSTRAINT fk_producto_ucompra FOREIGN KEY (unidad_compra_id) REFERENCES unidad_medida(unidad_id),
   CONSTRAINT fk_producto_uventa FOREIGN KEY (unidad_venta_id) REFERENCES unidad_medida(unidad_id)
 );
-INSERT INTO `producto` (`producto_id`, `nombre`, `descripcion`, `precio`, `stock`, `imagen_url`, `categoria_id`, `unidad_compra_id`, `unidad_venta_id`, `factor_conversion`) VALUES
 
-(1, 'Albacora Limpia', 'Albacora sin vísceras ni piel.', 3.00, 1.0000, 'public/img/albacoraLimpia.jpg', 1, 1, 2, 1.0000),
-(2, 'Albacora Entera', 'Pez albacora entero', 3.00, 1.0000, 'public/img/albacoraEntera.jpg', 1, 1, 2, 1.0000),
-(3, 'Pulpo', 'Pulpo fresco en porciones.', 4.00, 1.0000, 'public/img/pulpo.jpg', 3, 1, 2, 1.0000),
-(4, 'Camarón Mar', 'Camarón de mar grande.', 4.00, 1.0000, 'public/img/camaronMar.jpg', 2, 1, 2, 1.0000),
-(5, 'Albacora por libra', 'Porciones de albacora por libra.', 4.00, 1.0000, 'public/img/albacoraLibra.png', 1, 1, 2, 1.0000),
-(6, 'Albacora negocio', 'Precio especial por volumen.', 2.00, 1.0000, 'public/img/albacoraNegocio.jpg', 1, 1, 2, 1.0000),
-(7, 'Calamar', 'Calamar fresco por libra.', 4.00, 1.0000, 'public/img/calamar.jpg', 3, 1, 2, 1.0000),
-(8, 'langostino', 'Langostinos grandes de mar.', 4.00, 1.0000, 'public/img/langostino.jpg', 2, 1, 2, 1.0000),
-(9, 'Pez Espada', 'Filetes de pescado espada.', 4.00, 1.0000, 'public/img/espada.jpg', 1, 1, 2, 1.0000),
-(10, 'almeja', 'Almejas frescas empacadas.', 4.00, 500.0000, 'public/img/almejas.jpg', 2, 3, 3, 1.0000),
-(11, 'Mejillones', 'Mejillones limpios en funda.', 4.00, 1000.0000, 'public/img/mejillones.jpg', 2, 3, 3, 1.0000),
-(12, 'Conchas', 'Conchas enteras empacadas (100 unds).', 4.00, 2000.0000, 'public/img/conchas.jpg', 2, 3, 3, 1.0000),
-(13, 'Pez Rayado', 'Pescado rayado fileteado.', 5.00, 1.0000, 'public/img/rayado.jpg', 1, 1, 2, 1.0000),
-(14, 'Pez Cache', 'Cache fresco en cortes por libra.', 3.00, 1.0000, 'public/img/cache.jpg', 1, 1, 2, 1.0000),
-(15, 'Tilapia', 'Tilapia limpia en porciones.', 3.00, 1.0000, 'public/img/tilapia.jpg', 1, 1, 2, 1.0000),
-(16, 'Picudo', 'Picudo fresco fileteado.', 5.00, 1.0000, 'public/img/picudo.jpg', 1, 1, 2, 1.0000),
-(17, 'Camarón Piscina', 'Camarón de cultivo.', 4.00, 1.0000, 'public/img/camaronPiscina.jpg', 2, 1, 2, 1.0000),
-(18, 'Camarón Río', 'Camarón silvestre de río.', 6.00, 1.0000, 'public/img/camaronRio.jpg', 2, 1, 2, 1.0000);
+-- ================================================
+-- 6. TRIGGER: trg_SetFactorConversion
+-- Establece el factor de conversión automáticamente al insertar un nuevo producto.
+-- Esto es crucial porque el `factor_conversion` no se inserta desde la interfaz de usuario.
+-- ================================================
+DELIMITER $$
+
+CREATE TRIGGER trg_SetFactorConversion
+BEFORE INSERT ON producto
+FOR EACH ROW
+BEGIN
+    -- ID de Tonelada es 1
+    -- ID de Libra es 2
+    -- ID de Unidad es 3
+
+    -- Si la unidad de compra es 'Tonelada'
+    IF NEW.unidad_compra_id = 1 THEN
+        -- Y la unidad de venta es 'Libra'
+        IF NEW.unidad_venta_id = 2 THEN
+            SET NEW.factor_conversion = 2204.6200; -- Aproximadamente 2204.62 libras en 1 tonelada métrica
+        END IF;
+    -- Si la unidad de compra es 'Unidad'
+    ELSEIF NEW.unidad_compra_id = 3 THEN
+        -- Y la unidad de venta también es 'Unidad'
+        IF NEW.unidad_venta_id = 3 THEN
+            SET NEW.factor_conversion = 1.0000; -- No hay conversión, 1 unidad = 1 unidad
+        END IF;
+    END IF;
+    -- Para cualquier otra combinación o si los IDs no coinciden,
+    -- NEW.factor_conversion mantendrá el valor que se envió o el DEFAULT (1.0000).
+    -- Asegúrate de que las `unidad_compra_id` y `unidad_venta_id` estén siempre presentes.
+END$$
+
+DELIMITER ;
+
+-- ================================================
+-- 7. INSERCIÓN DE DATOS DE PRODUCTOS
+-- ¡IMPORTANTE! Revisa los valores de `stock` y `factor_conversion`
+-- Para productos de tonelada a libra, el `stock` debe ser en toneladas
+-- y el `factor_conversion` se establecerá automáticamente por el trigger.
+-- Para productos de unidad a unidad, el `stock` debe ser en unidades y
+-- el `factor_conversion` se establecerá automáticamente en 1.0000.
+-- ================================================
+INSERT INTO `producto` (`producto_id`, `nombre`, `descripcion`, `precio`, `stock`, `imagen_url`, `categoria_id`, `unidad_compra_id`, `unidad_venta_id`, `factor_conversion`) VALUES
+(1, 'Albacora Limpia', 'Albacora sin vísceras ni piel.', 3.00, 1.0000, 'public/img/albacoraLimpia.jpg', 1, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(2, 'Albacora Entera', 'Pez albacora entero', 3.00, 1.0000, 'public/img/albacoraEntera.jpg', 1, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(3, 'Pulpo', 'Pulpo fresco en porciones.', 4.00, 1.0000, 'public/img/pulpo.jpg', 3, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(4, 'Camarón Mar', 'Camarón de mar grande.', 4.00, 1.0000, 'public/img/camaronMar.jpg', 2, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(5, 'Albacora por libra', 'Porciones de albacora por libra.', 4.00, 1.0000, 'public/img/albacoraLibra.png', 1, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(6, 'Albacora negocio', 'Precio especial por volumen.', 2.00, 1.0000, 'public/img/albacoraNegocio.jpg', 1, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(7, 'Calamar', 'Calamar fresco por libra.', 4.00, 1.0000, 'public/img/calamar.jpg', 3, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(8, 'langostino', 'Langostinos grandes de mar.', 4.00, 1.0000, 'public/img/langostino.jpg', 2, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(9, 'Pez Espada', 'Filetes de pescado espada.', 4.00, 1.0000, 'public/img/espada.jpg', 1, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(10, 'almeja', 'Almejas frescas empacadas.', 4.00, 500.0000, 'public/img/almejas.jpg', 2, 3, 3, DEFAULT), -- El factor será 1.0000 por el trigger
+(11, 'Mejillones', 'Mejillones limpios en funda.', 4.00, 1000.0000, 'public/img/mejillones.jpg', 2, 3, 3, DEFAULT), -- El factor será 1.0000 por el trigger
+(12, 'Conchas', 'Conchas enteras empacadas (100 unds).', 4.00, 2000.0000, 'public/img/conchas.jpg', 2, 3, 3, DEFAULT), -- El factor será 1.0000 por el trigger
+(13, 'Pez Rayado', 'Pescado rayado fileteado.', 5.00, 1.0000, 'public/img/rayado.jpg', 1, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(14, 'Pez Cache', 'Cache fresco en cortes por libra.', 3.00, 1.0000, 'public/img/cache.jpg', 1, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(15, 'Tilapia', 'Tilapia limpia en porciones.', 3.00, 1.0000, 'public/img/tilapia.jpg', 1, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(16, 'Picudo', 'Picudo fresco fileteado.', 5.00, 1.0000, 'public/img/picudo.jpg', 1, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(17, 'Camarón Piscina', 'Camarón de cultivo.', 4.00, 1.0000, 'public/img/camaronPiscina.jpg', 2, 1, 2, DEFAULT), -- El factor será 2204.6200 por el trigger
+(18, 'Camarón Río', 'Camarón silvestre de río.', 6.00, 1.0000, 'public/img/camaronRio.jpg', 2, 1, 2, DEFAULT); -- El factor será 2204.6200 por el trigger
 
 
 -- ================================================
--- ** 6. NUEVA TABLA: carrito **
+-- 8. NUEVA TABLA: carrito
 -- Esta tabla almacenará los productos temporales en el carrito de cada usuario.
 -- ================================================
 CREATE TABLE carrito (
@@ -125,7 +168,7 @@ CREATE TABLE carrito (
 );
 
 -- ================================================
--- 7. TABLA: pedido
+-- 9. TABLA: pedido
 -- ================================================
 CREATE TABLE pedido (
   pedido_id INT(11) NOT NULL AUTO_INCREMENT,
@@ -138,7 +181,7 @@ CREATE TABLE pedido (
 );
 
 -- ================================================
--- 8. TABLA: pedidoproducto
+-- 10. TABLA: pedidoproducto
 -- ================================================
 CREATE TABLE pedidoproducto (
   pedido_id INT(11) NOT NULL,
@@ -151,7 +194,8 @@ CREATE TABLE pedidoproducto (
 );
 
 -- ================================================
--- 9. TRIGGER: Actualizar total del pedido automáticamente
+-- 11. TRIGGER: trg_CalcularTotal
+-- Actualiza el total del pedido automáticamente
 -- ================================================
 DELIMITER $$
 
@@ -170,7 +214,8 @@ BEGIN
 END$$
 
 -- ================================================
--- 10. TRIGGER: Descontar del stock automáticamente según unidad
+-- 12. TRIGGER: trg_DescontarStock
+-- Descuenta del stock automáticamente según unidad y factor de conversión
 -- ================================================
 CREATE TRIGGER trg_DescontarStock
 AFTER INSERT ON pedidoproducto

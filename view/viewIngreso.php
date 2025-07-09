@@ -68,7 +68,6 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
                             <select name="unidadCompraProducto" id="unidadCompraProducto" class="form-control bg-white text-purple" required>
                                 <option value="">Seleccione unidad de compra</option>
                                 <option value="1">Toneladas</option>
-                                <option value="2">Libras</option>
                                 <option value="3">Unidades</option>
                                 <!-- Aquí deberías cargar las unidades de medida dinámicamente desde la base de datos -->
                             </select>
@@ -77,7 +76,6 @@ require_once __DIR__ . '/../controller/UsuarioController.php';
                             <label for="unidadVentaProducto">Unidad de Venta</label>
                             <select name="unidadVentaProducto" id="unidadVentaProducto" class="form-control bg-white text-purple" required>
                                 <option value="">Seleccione unidad de venta</option>
-                                <option value="1">Kilogramos</option>
                                 <option value="2">Libras</option>
                                 <option value="3">Unidades</option>
                                 <!-- Aquí deberías cargar las unidades de medida dinámicamente desde la base de datos -->
