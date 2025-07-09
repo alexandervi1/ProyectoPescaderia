@@ -318,3 +318,94 @@ function mostrarModal(mensaje, tipo) {
     modal.style.display = "none";
   }, 2000);
 }
+
+// Función para mostrar el modal de mensaje (ya la tenías y es correcta)
+function mostrarModal(mensaje) {
+    const modal = document.getElementById("modal");
+    const modalMensaje = document.getElementById("modal-mensaje");
+    modalMensaje.textContent = mensaje;
+    modal.style.display = "flex"; // Usa flex para centrar
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 2000); // El modal desaparece después de 2 segundos
+}
+
+// Función para cambiar la imagen principal (si la usas)
+function cambiarImagen(nuevaSrc) {
+    document.getElementById('imagenAmpliada').src = nuevaSrc;
+}
+
+// Función para cambiar la cantidad en el input (solo en el frontend de producto.php)
+function cambiarCantidad(delta) {
+    const inputCantidad = document.getElementById('cantidad');
+    let cantidadActual = parseInt(inputCantidad.value);
+    let nuevaCantidad = cantidadActual + delta;
+
+    if (nuevaCantidad < 1) {
+        nuevaCantidad = 1; // Asegura que la cantidad mínima sea 1
+    }
+    inputCantidad.value = nuevaCantidad;
+}
+
+// Función para agregar el producto al carrito.
+// Esta función realizará una petición al servidor y mostrará el mensaje.
+function agregarAlCarrito(producto_id, cantidad) {
+    const cantidadFinal = parseInt(cantidad); // Asegúrate de que sea un número entero
+
+    if (isNaN(cantidadFinal) || cantidadFinal < 1) {
+        mostrarModal("Por favor, introduce una cantidad válida.");
+        return;
+    }
+
+    // Realizar la petición POST a mAgregarAlCarrito.php
+    fetch('../model/mAgregarAlCarrito.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded', // Es importante para enviar datos POST
+        },
+        body: `producto_id=${producto_id}&cantidad=${cantidadFinal}`
+    })
+    .then(response => {
+        // Manejar respuestas HTTP que no sean OK (ej. 401 Unauthorized, 500 Internal Server Error)
+        if (!response.ok) {
+            // Intentar leer el cuerpo de la respuesta como JSON para un mensaje de error del servidor
+            return response.json().then(errorData => {
+                throw new Error(errorData.message || `Error HTTP: ${response.status}`);
+            }).catch(() => {
+                // Si la respuesta no es JSON (ej. HTML de error 404/500), lanzar un error genérico
+                throw new Error(`Error HTTP: ${response.status} al agregar al carrito.`);
+            });
+        }
+        return response.json(); // Si la respuesta es OK, la parseamos como JSON
+    })
+    .then(data => {
+        if (data.status === 'success') {
+            // Mostrar mensaje de éxito desde el backend o un mensaje predeterminado
+            mostrarModal(data.message || "Producto agregado al carrito con éxito.");
+
+            // Opcional: Si tienes una forma de actualizar el icono/contador del carrito en el navbar, hazlo aquí
+            // Por ejemplo, si app.js tiene una función llamada 'actualizarContadorCarrito'
+            // if (typeof actualizarContadorCarrito === 'function') {
+            //     actualizarContadorCarrito();
+            // }
+
+        } else {
+            // Si el backend devuelve status: 'error'
+            mostrarModal(data.message || "Error al agregar el producto al carrito.");
+        }
+    })
+    .catch(error => {
+        console.error('Error al agregar al carrito:', error);
+        // Personaliza el mensaje de error para el usuario
+        if (error.message.includes("401")) { // Si el error es por HTTP 401 (Usuario no autenticado)
+            mostrarModal("Necesitas iniciar sesión para agregar productos al carrito.");
+            // Aquí podrías abrir un modal de login o redirigir
+            // Ejemplo: $('#loginModal').modal('show'); // Si usas Bootstrap modals
+        } else {
+            mostrarModal(`Error al agregar al carrito: ${error.message}.`);
+        }
+    });
+}
+
+// Puedes añadir aquí cualquier otra función específica de producto.js
+// como el manejo de modals de login/registro si los mueves aquí.
