@@ -71,7 +71,7 @@ if (!$producto) {
                 <i class="bi bi-person-circle" style="color: white; font-size: 1.5rem;"></i>
                 <span id="user-name" class="user-info" style="color: white;"></span>
                 <a href="carrito.php" aria-label="Carrito de compras"><i class="bi bi-cart"></i></a>
-                <a href="controller/logout.php" aria-label="Cerrar sesión" style="color: white;">
+                <a href="../controller/logout.php" aria-label="Cerrar sesión" style="color: white;">
                     <i class="bi bi-power" style="font-size: 2.0rem;"></i>
                 </a>
             </div>
@@ -135,7 +135,8 @@ if (!$producto) {
         </div>
     </div>
     <script src="../public/js/producto.js?v=<?= time() ?>"></script>
-    <script src="/public/js/index.js"></script>
-    <script src="/public/js/app.js"></script>
+    <script src="../public/js/index.js"></script>
+    <script src="../public/js/app.js"></script>
+    <script src="../public/js/app copy.js"></script>
 </body>
 </html>

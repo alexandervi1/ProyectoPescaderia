@@ -1,11 +1,7 @@
 <?php
-session_start();
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../index.html");
-    exit;
-}
 
-$usuario_id = $_SESSION['usuario_id'];
+session_start(); 
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +13,6 @@ $usuario_id = $_SESSION['usuario_id'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../public/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../public/css/carrito.css">
     <style>
         /* Estilos específicos para esta página (pueden ir en carrito.css) */
         .table-striped tbody tr:nth-of-type(odd) {
@@ -149,4 +144,6 @@ $usuario_id = $_SESSION['usuario_id'];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../public/js/index.js"></script> <script src="../public/js/app.js"></script>
     <script src="../public/js/carrito.js"></script> </body>
+    <script src="../public/js/app.js"></script>
+    <script src="../public/js/app copy.js"></script>
 </html>

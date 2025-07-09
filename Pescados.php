@@ -1,6 +1,22 @@
 <?php
-session_start();
-$usuarioLogueado = isset($_SESSION['usuario']);
+// view/carrito.php
+
+// 1. Iniciar la sesión: DEBE SER LA PRIMERA LÍNEA EJECUTABLE
+// Asegúrate de que no haya espacios en blanco, HTML, o comentarios antes de esta línea.
+session_start(); 
+
+// OPCIONAL: Si quieres proteger esta página para que solo usuarios logueados la vean.
+// Si no está logueado, redirige al inicio o a la página de login.
+// if (!isset($_SESSION['usuario_id'])) {
+//     header('Location: ../index.php'); // Ajusta esta ruta a tu página de inicio/login
+//     exit();
+// }
+
+// Aquí puedes incluir otras dependencias PHP que esta página necesite (ej. modelos, controladores)
+// require_once '../config/confConexion.php';
+// require_once '../controller/ProductoController.php'; 
+// ...
+
 ?>
 
 <!DOCTYPE html>
@@ -214,9 +230,9 @@ $usuarioLogueado = isset($_SESSION['usuario']);
     <script type="module" src="./public/js/cargarImagen.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="../public/js/index.js"></script>
-    <script src="../public/js/app copy.js"></script>
-    <script src="/public/js/app.js"></script>
+    <script src="public/js/index.js"></script>
+    <script src="public/js/app copy.js"></script>
+    <script src="public/js/app.js"></script>
 </body>
 
 </html>
