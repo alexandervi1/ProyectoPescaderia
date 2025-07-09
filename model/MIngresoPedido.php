@@ -38,11 +38,45 @@ if ($input['accion'] === 'registrar_pedido') {
         $productos = $result->fetch_all(MYSQLI_ASSOC);
  
         // 3. Insertar en pedidoproducto
-        $stmtInsert = $conn->prepare("INSERT INTO pedidoproducto (pedido_id, producto_id, cantidad) VALUES (?, ?, ?)");
-        foreach ($productos as $prod) {
-            $stmtInsert->bind_param("iid", $pedido_id, $prod['producto_id'], $prod['cantidad']);
-            $stmtInsert->execute();
-        }
+       // 3. Insertar en pedidoproducto y actualizar stock
+$stmtInsert = $conn->prepare("INSERT INTO pedidoproducto (pedido_id, producto_id, cantidad) VALUES (?, ?, ?)");
+$stmtStock = $conn->prepare("UPDATE producto SET stock = stock - ? WHERE producto_id = ?");
+ 
+foreach ($productos as $prod) {
+    $producto_id = $prod['producto_id'];
+    $cantidad_vendida = $prod['cantidad'];
+ 
+    // Obtener unidad_compra, unidad_venta y factor_conversion
+    $stmtInfo = $conn->prepare("SELECT unidad_compra_id, unidad_venta_id, factor_conversion FROM producto WHERE producto_id = ?");
+    $stmtInfo->bind_param("i", $producto_id);
+    $stmtInfo->execute();
+    $info = $stmtInfo->get_result()->fetch_assoc();
+ 
+    $unidad_compra = $info['unidad_compra_id'];
+    $unidad_venta = $info['unidad_venta_id'];
+    $factor = floatval($info['factor_conversion']);
+ 
+    // Determinar cuánto descontar
+    if ($unidad_compra == 1 && $unidad_venta == 2) {
+        // Tonelada a libra
+        $cantidad_convertida = $cantidad_vendida / $factor;
+    } elseif ($unidad_compra == 3 && $unidad_venta == 3) {
+        // Unidad a unidad
+        $cantidad_convertida = $cantidad_vendida;
+    } else {
+        // Cualquier otra combinación
+        $cantidad_convertida = $cantidad_vendida / max($factor, 1);
+    }
+ 
+    // Insertar en pedidoproducto
+    $stmtInsert->bind_param("iid", $pedido_id, $producto_id, $cantidad_vendida);
+    $stmtInsert->execute();
+ 
+    // Actualizar stock
+    $stmtStock->bind_param("di", $cantidad_convertida, $producto_id);
+    $stmtStock->execute();
+}
+ 
  
         // 4. Vaciar el carrito
         $stmt = $conn->prepare("DELETE FROM carrito WHERE usuario_id = ?");
@@ -58,3 +92,4 @@ if ($input['accion'] === 'registrar_pedido') {
     }
 }
 ?>
+ 
