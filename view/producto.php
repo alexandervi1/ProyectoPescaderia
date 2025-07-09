@@ -134,7 +134,7 @@ if (!$producto) {
             <span id="modal-mensaje"></span>
         </div>
     </div>
-    <script src="../public/js/producto.js"></script>
+    <script src="../public/js/producto.js?v=<?= time() ?>"></script>
     <script src="/public/js/index.js"></script>
     <script src="/public/js/app.js"></script>
 </body>

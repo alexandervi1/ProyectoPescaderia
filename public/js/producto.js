@@ -234,3 +234,43 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+function agregarAlCarrito(producto_id, cantidad) {
+    // Realiza una petición POST a MAgregarAlCarrito.php para agregar el producto
+
+    
+    fetch('../model/MAgregarAlCarrito.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `producto_id=${producto_id}&cantidad=${cantidad}`
+
+    
+    
+    })
+    .then(res => res.json()) // Convierte la respuesta en JSON
+    .then(data => {
+        // Si el servidor responde con éxito
+        if (data.status === 'success') {
+            // Muestra un modal o mensaje de éxito indicando que el producto fue agregado
+            mostrarModal('Producto agregado al carrito.', 'success');
+        } else {
+            // Si hubo un error, muestra el mensaje recibido o uno genérico
+            mostrarModal(data.message || 'Error al agregar al carrito.', 'error');
+        }
+    })
+    .catch(error => {
+        // En caso de error en la red o inesperado, se muestra en consola y modal de error
+        console.error(error);
+        mostrarModal('Error de red al agregar al carrito.', 'error');
+    });
+}
+function mostrarModal(mensaje, tipo) {
+  const modal = document.getElementById("modal");
+  const modalMensaje = document.getElementById("modal-mensaje");
+
+  modalMensaje.textContent = mensaje;
+  modal.style.display = "flex";
+
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 2000);
+}
