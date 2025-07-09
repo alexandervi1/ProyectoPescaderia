@@ -271,20 +271,30 @@ document.addEventListener("DOMContentLoaded", function() {
 function agregarAlCarrito(producto_id, cantidad) {
     // Realiza una petición POST a MAgregarAlCarrito.php para agregar el producto
 
-    
     fetch('../model/MAgregarAlCarrito.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `producto_id=${producto_id}&cantidad=${cantidad}`
-
-    
-    
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        // CAMBIO AQUÍ: Usa ${} para interpolar los valores de las variables
+        body: `producto_id=${producto_id}&cantidad=${cantidad}` 
+        // ¡Ojo! Asegúrate de que las variables 'producto_id' y 'cantidad'
+        // que pasas a la función tengan valores válidos cuando se llama.
     })
-    .then(res => res.json()) // Convierte la respuesta en JSON
+    .then(res => {
+        // Mejorar el manejo de errores para respuestas no JSON o errores HTTP
+        if (!res.ok) {
+            // Si la respuesta no es 2xx, lanza un error que será capturado por el .catch
+            return res.json().then(errorData => {
+                throw new Error(errorData.message || 'Error en el servidor');
+            }).catch(() => {
+                // Si ni siquiera es JSON, o el JSON es inválido
+                throw new Error(`HTTP error! status: ${res.status}`);
+            });
+        }
+        return res.json(); // Convierte la respuesta en JSON
+    })
     .then(data => {
         // Si el servidor responde con éxito
         if (data.status === 'success') {
-            // Muestra un modal o mensaje de éxito indicando que el producto fue agregado
             mostrarModal('Producto agregado al carrito.', 'success');
         } else {
             // Si hubo un error, muestra el mensaje recibido o uno genérico
@@ -293,8 +303,8 @@ function agregarAlCarrito(producto_id, cantidad) {
     })
     .catch(error => {
         // En caso de error en la red o inesperado, se muestra en consola y modal de error
-        console.error(error);
-        mostrarModal('Error de red al agregar al carrito.', 'error');
+        console.error("Error al agregar al carrito (fetch):", error);
+        mostrarModal(error.message || 'Error de red al agregar al carrito.', 'error');
     });
 }
 function mostrarModal(mensaje, tipo) {

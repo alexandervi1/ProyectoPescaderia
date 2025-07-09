@@ -138,5 +138,6 @@ if (!$producto) {
     <script src="../public/js/index.js"></script>
     <script src="../public/js/app.js"></script>
     <script src="../public/js/app copy.js"></script>
+    <script src="../public/js/carrito.js"></script>
 </body>
 </html>
