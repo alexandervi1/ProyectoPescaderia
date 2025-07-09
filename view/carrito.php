@@ -146,5 +146,6 @@ session_start();
     <script src="../public/js/carrito.js"></script> 
     <script src="../public/js/app.js"></script>
     <script src="../public/js/app copy.js"></script>
+    <script src="../public/js/IngresoPedido.js"></script>
     </body>
 </html>

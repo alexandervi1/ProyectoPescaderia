@@ -18,6 +18,23 @@ INSERT INTO rol (rol_id, nombre) VALUES
 (3, 'Visitante');
 
 -- ================================================
+-- 1.5 TABLA: configuracion
+-- Esta tabla almacena configuraciones generales del sistema, como el IVA actual.
+-- ================================================
+
+CREATE TABLE `configuracion` (
+  `clave` varchar(50) NOT NULL,
+  `valor` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ 
+--
+-- Volcado de datos para la tabla `configuracion`
+--
+ 
+INSERT INTO `configuracion` (`clave`, `valor`) VALUES
+('iva_actual', '15');
+
+-- ================================================
 -- 2. TABLA: usuario
 -- ================================================
 CREATE TABLE usuario (
