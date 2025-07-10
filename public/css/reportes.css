@@ -1,0 +1,223 @@
+
+       /* ====================================================================
+   Variables CSS para un control de tema más sencillo
+   ==================================================================== */
+:root {
+    --primary-blue: #1A519D;
+    --dark-blue: #002E5D; /* Un tono más oscuro para bordes o sombras sutiles */
+    --light-blue: #7CCCED;
+    --background-light: #f8f9fa;
+    --container-bg: #fff;
+    --text-dark: #333;
+    --text-muted: #6c757d;
+    --text-light: #ffffff; /* Color de texto para fondos oscuros */
+    --border-light: #dee2e6;
+    --table-stripe: rgba(26, 81, 157, 0.03); /* Un azul muy tenue para filas impares */
+    --table-hover: rgba(26, 81, 157, 0.08); /* Un poco más oscuro al pasar el ratón */
+
+    /* Colores de Bootstrap que pueden necesitar sobrescribirse con más especificidad */
+    --bs-info: #0dcaf0;
+    --bs-success: #198754;
+    --bs-warning: #ffc107;
+}
+
+/* ====================================================================
+   Estilos Generales y Reseteos (Alineados con tu style.css)
+   ==================================================================== */
+body {
+    background-color: var(--background-light);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* ====================================================================
+   Navbar
+   ==================================================================== */
+.navbar {
+    background-color: var(--primary-blue); /* Usando variable */
+    padding: 10px 0;
+    box-shadow: none;
+}
+
+.navbar-brand img {
+    background-color: var(--container-bg); /* Blanco */
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.navbar .btn {
+    color: var(--text-light); /* Texto blanco */
+    border: 1px solid var(--text-light); /* Borde blanco */
+}
+
+/* Botón "Volver a la Tienda" y "Imprimir Reporte" */
+.navbar .btn-warning,
+.navbar .btn-primary {
+    background-color: var(--primary-blue); /* Mismo azul oscuro para coherencia */
+    border-color: var(--text-light); /* Borde blanco */
+}
+
+.navbar .btn-warning:hover,
+.navbar .btn-primary:hover {
+    background-color: var(--light-blue); /* Azul claro al pasar el mouse */
+    border-color: var(--light-blue);
+}
+
+/* ====================================================================
+   Contenedor Principal del Reporte
+   ==================================================================== */
+.container.report-section { /* Más específico para evitar conflictos */
+    background-color: var(--container-bg); /* Contenedor blanco */
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    color: var(--text-dark); /* Asegurar color de texto oscuro por defecto */
+}
+
+/* Títulos y Encabezados */
+.report-section h1 {
+    color: var(--primary-blue); /* Título principal azul oscuro */
+    margin-bottom: 1.5rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+.report-section .lead {
+    color: #555; /* Un gris oscuro para mejor legibilidad */
+    margin-bottom: 2.5rem; /* Aumenta el margen inferior para separar del resumen */
+}
+
+/* ====================================================================
+   Estilo de la tarjeta de resumen
+   ==================================================================== */
+.card.shadow-sm.mb-5 {
+    border: none; /* Eliminar el borde predeterminado de la tarjeta si no es deseado */
+}
+
+.card-header {
+    background-color: var(--primary-blue); /* Azul oscuro */
+    color: var(--text-light); /* Texto blanco */
+    border-bottom: 1px solid var(--dark-blue); /* Tono más oscuro de azul */
+    font-weight: bold;
+}
+
+.card-body .p-3.border.rounded {
+    background-color: var(--container-bg); /* Fondo blanco para las cajas de resumen */
+    border-color: var(--border-light); /* Borde estándar de Bootstrap */
+    box-shadow: 0 0.05rem 0.15rem rgba(0, 0, 0, 0.05); /* Sombra muy sutil */
+    color: var(--text-dark); /* Asegurar color de texto para las cajas de resumen */
+}
+
+/* Asegurando la visibilidad de los números de resumen con colores de Bootstrap */
+.card-body h4.text-info { color: var(--bs-info); }
+.card-body h4.text-success { color: var(--bs-success); }
+.card-body h4.text-warning { color: var(--bs-warning); }
+
+.card-body p.text-muted {
+    color: var(--text-muted); /* Gris de Bootstrap, legible en fondo blanco */
+    font-weight: normal;
+}
+
+/* ====================================================================
+   Tabla de Reporte
+   ==================================================================== */
+.table-responsive {
+    margin-top: 1.5rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.table thead th {
+    background-color: var(--primary-blue); /* Azul oscuro para los encabezados */
+    color: var(--text-light); /* Texto blanco en encabezados */
+    border-bottom: 2px solid var(--dark-blue); /* Borde más oscuro */
+    padding: 0.75rem;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: middle;
+    color: var(--text-dark); /* Asegurar que el texto del cuerpo de la tabla sea oscuro */
+}
+
+.table tbody tr:nth-of-type(odd) {
+    background-color: var(--table-stripe); /* Azul muy tenue para filas impares */
+}
+
+.table tbody tr:hover {
+    background-color: var(--table-hover); /* Un poco más oscuro al pasar el ratón */
+}
+
+/* ====================================================================
+   Footer
+   ==================================================================== */
+footer {
+    background-color: var(--primary-blue); /* Azul oscuro */
+    color: var(--text-light); /* Texto blanco para todo el footer */
+    text-align: center;
+    padding: 15px 0;
+    border-top: none;
+}
+
+footer p {
+    color: var(--text-light); /* Forzar blanco para los párrafos de contacto/dirección */
+    margin-bottom: 5px;
+}
+
+.footer-icons a {
+    color: var(--text-light); /* Iconos blancos */
+    margin: 0 10px;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.footer-icons a:hover {
+    color: var(--light-blue); /* Azul claro al pasar el mouse */
+}
+
+/* ====================================================================
+   Estilos de impresión
+   ==================================================================== */
+@media print {
+    .navbar, .btn-print-hide, footer {
+        display: none; /* No usar !important aquí a menos que sea absolutamente necesario */
+    }
+    main {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .container {
+        width: 100%;
+        max-width: none;
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+    }
+    .table {
+        font-size: 0.75rem;
+        border: 1px solid var(--border-light);
+    }
+    .card.shadow-sm.mb-5 {
+        border: 1px solid var(--border-light);
+        box-shadow: none;
+    }
+    .card-header {
+        border-bottom: 1px solid var(--border-light);
+    }
+    /* Asegurar que el texto sea negro en la impresión para mejor contraste */
+    body, p, h1, h4, td, th {
+        color: black;
+    }
+    .table thead th {
+        background-color: #e9ecef; /* Fondo gris claro para encabezados de tabla en impresión */
+        color: black;
+    }
+}

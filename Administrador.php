@@ -54,9 +54,9 @@ require_once __DIR__ . '/controller/UsuarioController.php';
                     </a>
                 </div>
                 <div title="Listado de productos por abastecer" class="col-md-3 mb-3">
-                    <a href="./controller/adminControlador.php?opcion=4" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height">
+                    <a href="view/seleccionar_cliente_pedidos.php" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height">
                         <img src="public/img/icons/icoFacturas.png" alt="imagen no disponible" class="img-fluid mb-2 custom-img">
-                        Facturas
+                        Ver pedidos por clientes
                     </a>
                 </div>
             </div>

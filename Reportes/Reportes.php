@@ -64,15 +64,15 @@ $nombreAdministrador = $_SESSION['nombre_usuario'] ?? "Administrador"; // O cual
             <div class="row justify-content-center"> <!-- Centrar los botones de reporte -->
                 <!-- Reporte de Ventas por Período -->
                 <div title="Generar reporte de ventas por un período específico" class="col-md-3 mb-3">
-                    <a class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height" href="../controller/reportesControlador.php?tipo=ventas"> <!-- Ruta corregida -->
+                    <a class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height" href="../view/reporteVentas.php"> <!-- Ruta corregida -->
                         <!-- Icono de Ventas -->
                         <img src="../public/img/icons/icoReport.png" alt="Reporte de Ventas" class="img-fluid mb-2 custom-img">
-                        Reporte de Ventas <!-- Muestra idcliente,fechaCompra,totalCompra,totalConiva -->
+                        Ventas <!-- Muestra idcliente,fechaCompra,totalCompra,totalConiva -->
                     </a>
                 </div>
                 <!-- Reporte de Productos Más Vendidos -->
                 <div title="Ver los productos más vendidos" class="col-md-3 mb-3">
-                    <a href="../controller/reportesControlador.php?tipo=mas_vendidos" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height"> <!-- Ruta corregida -->
+                    <a href="../view/reporteProductosMasVendidos.php" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height"> <!-- Ruta corregida -->
                         <!-- Icono de Productos Más Vendidos -->
                         <img src="../public/img/icons/icoReport.png" alt="Productos Más Vendidos" class="img-fluid mb-2 custom-img">
                         Productos Más Vendidos <!-- Idprducto,nombreProducto,cantidadVendida-->
@@ -80,18 +80,18 @@ $nombreAdministrador = $_SESSION['nombre_usuario'] ?? "Administrador"; // O cual
                 </div>
                 <!-- Reporte de Stock Bajo -->
                 <div title="Listado de productos con stock bajo" class="col-md-3 mb-3">
-                    <a href="../controller/reportesControlador.php?tipo=stock_bajo" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height"> <!-- Ruta corregida -->
+                    <a href="../view/reporteStockPorCategoria.php" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height"> <!-- Ruta corregida -->
                         <!-- Icono de Stock Bajo -->
                         <img src="../public/img/icons/icoReport.png" alt="Stock Bajo" class="img-fluid mb-2 custom-img">
-                        Reporte de facturacion <!--  -->
+                        Stock segun la Categoria <!--  -->
                     </a>
                 </div>
                 <!-- Reporte de Clientes (ej. Top Clientes) -->
                 <div title="Ver reporte de clientes (ej. top compradores)" class="col-md-3 mb-3">
-                    <a href="../controller/reportesControlador.php?tipo=clientes" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height"> <!-- Ruta corregida -->
+                    <a href="../view/reporteConBajoStock.php" class="btnAd w-100 d-flex flex-column align-items-center btnAd-custom-height"> <!-- Ruta corregida -->
                         <!-- Icono de Clientes -->
                         <img src="../public/img/icons/icoReport.png" alt="Reporte de Clientes" class="img-fluid mb-2 custom-img">
-                        Reporte de Clientes <!-- Texto del botón actualizado -->
+                        Productos con bajo Stock <!-- Texto del botón actualizado -->
                     </a>
                 </div>
             </div>
