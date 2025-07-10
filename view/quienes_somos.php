@@ -22,6 +22,9 @@
                 <a href="../index.html" class="btn btn-warning">
                     <i class="bi bi-house-door"></i> Volver a la tienda
                 </a>
+                <a href="../view/ayuda.php" id="btn-ayuda" class="btn btn-link text-light" style="color: white;">
+                    <i class="bi bi-question-circle"></i> Ayuda
+                </a>
             </div>
         </div>
     </nav>

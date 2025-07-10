@@ -76,6 +76,9 @@ session_start();
                 <a href="controller/logout.php" aria-label="Cerrar sesión" style="color: white;">
                     <i class="bi bi-power" style="font-size: 2.0rem;"></i>
                 </a>
+                <a href="./controller/usercontrolador.php?accion=ayuda" id="btn-ayuda" class="btn btn-link text-light" style="color: white;">
+                    <i class="bi bi-question-circle"></i> Ayuda
+                </a>
             </div>
         </div>
     </nav>

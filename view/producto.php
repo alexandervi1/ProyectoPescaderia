@@ -161,6 +161,9 @@ if (!$producto) {
                 <a href="../controller/usercontrolador.php?accion=quienes_somos" id="btn-quienes" class="btn btn-link text-light" style="color: white;">¿Quiénes somos?</a>
                 <button class="btn btn-danger" id="open-login-modal">Iniciar Sesión</button>
                 <a href="#" class="btn btn-primary" id="open-register-modal">Registrarse</a>
+                <a href="./controller/usercontrolador.php?accion=ayuda" id="btn-ayuda" class="btn btn-link text-light" style="color: white;">
+                    <i class="bi bi-question-circle"></i> Ayuda
+                </a>
             </div>
             <div id="user-options">
                 <i class="bi bi-person-circle" style="color: white; font-size: 1.5rem;"></i>
@@ -168,6 +171,9 @@ if (!$producto) {
                 <a href="carrito.php" aria-label="Carrito de compras"><i class="bi bi-cart"></i></a>
                 <a href="../controller/logout.php" aria-label="Cerrar sesión" style="color: white;">
                     <i class="bi bi-power" style="font-size: 2.0rem;"></i>
+                </a>
+                <a href="./controller/usercontrolador.php?accion=ayuda" id="btn-ayuda" class="btn btn-link text-light" style="color: white;">
+                    <i class="bi bi-question-circle"></i> Ayuda
                 </a>
             </div>
         </div>
